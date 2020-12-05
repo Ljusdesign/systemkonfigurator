@@ -37,3 +37,9 @@
     transform: translateY(0px)
   }
 }
+
+.json {
+  text-align: 'left';
+  background: '#ccc';
+  padding: '1em';
+}
