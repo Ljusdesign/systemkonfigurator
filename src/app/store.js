@@ -1,8 +1,10 @@
-import { configureStore } from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { configureStore } from '@reduxjs/toolkit'
+import systemReducer from '../features/system/systemSlice'
+import fixtureReducer from '../features/fixture/fixtureSlice'
 
 export default configureStore({
   reducer: {
-    counter: counterReducer,
+    system: systemReducer,
+    fixture: fixtureReducer,
   },
-});
+})

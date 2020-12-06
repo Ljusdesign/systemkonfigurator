@@ -2,26 +2,12 @@ import React from 'react'
 import produce from 'immer'
 import './App.css'
 
-const drivers = {
-  '12v': [
-    {
-      'SNP15w': {
-        name: 'Snappy 15w',
-        power: 15,
-        voltage: 12,
-      }
-    }
-  ],
-  'cc': {
-    'LD30': {
-      name: 'LD30w',
-      current: 0.7,
-      maxPower: 30,
-      minVoltage: 6,
-      maxVoltage: 43,
-    }
-  }
-}
+import System from './features/system/System'
+import Fixture from './features/fixture/Fixture'
+
+import drivers from './products/drivers'
+import CCfixtures from './products/CCfixtures'
+
 const tracks = {
   "PicoTracLow": {
     name: "PicoTrac Low",
@@ -61,40 +47,11 @@ const PTfixtures = {
   },
 }
 
-const CCfixtures = {
-  'Gizmo': {
-    name: 'Gizmo CC for LED-profile',
-    shortName: "Gizmo",
-    voltage: 3,
-    current: 0.7,
-    length: 0,
-  },
-}
-
-const System = ({
-  driver = drivers.cc.LD30,
-  track = tracks.LEDProfile, fixtures
-}) => ({
-  driver, track, fixtures,
-})
-
 function App() {
   let CCSystem = {
     driver: drivers.cc.LD30,
     track: tracks.LEDProfileHigh,
     fixtures: [
-      CCfixtures.Gizmo,
-      CCfixtures.Gizmo,
-      CCfixtures.Gizmo,
-      CCfixtures.Gizmo,
-      CCfixtures.Gizmo,
-      CCfixtures.Gizmo,
-      CCfixtures.Gizmo,
-      CCfixtures.Gizmo,
-      CCfixtures.Gizmo,
-      CCfixtures.Gizmo,
-      CCfixtures.Gizmo,
-      CCfixtures.Gizmo,
       CCfixtures.Gizmo,
       CCfixtures.Gizmo,
     ],
@@ -112,6 +69,7 @@ function App() {
 
   return (
     <div className="App">
+      <System />
       <p>Total voltage of system: {CCSystem.fixtureVoltage()}</p>
       <p>Max voltage of system: {CCSystem.driver.maxVoltage}</p>
       <p>Total power of system: {CCSystem.fixturePower()}</p>
