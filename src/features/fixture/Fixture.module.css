@@ -1,0 +1,18 @@
+.fixture {
+  width: 150px;
+  height: 150px;
+  margin: 5px;
+  padding: 5px;
+  border: 4px dotted;
+  display: inline-block;
+  text-align: center;
+}
+
+.deleteButton {
+  position: relative;
+  float: right;
+  top: 0;
+  right: 0;
+  background: white;
+  border: 1px solid grey;
+}

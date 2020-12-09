@@ -1,11 +1,15 @@
 import React from 'react'
 import Fixture from './Fixture'
 
-function FixtureList({fixtures}) {
+function FixtureList({fixtures, deleteFixture }) {
   return (
-    <div>
-      {fixtures.map((fixture, index) => (
-        <Fixture key={index} fixture={fixture} />
+    <div style={{border: '1px dotted blue'}}>
+      {fixtures.map((fixture) => (
+        <Fixture
+          key={fixture.id}
+          fixture={fixture}
+          deleteFixture={deleteFixture}
+        />
       ))}
     </div>
   )

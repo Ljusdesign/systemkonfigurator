@@ -1,27 +1,16 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux';
-import {
-  setColor,
-  selectColor
-} from './fixtureSlice'
+import styles from './Fixture.module.css'
 
-function Fixture ({fixture}) {
-  const dispatch = useDispatch()
-  const selector = useSelector(selectColor)
+function Fixture({ fixture, deleteFixture }) {
   return (
-    <div style={{border: '4px dotted', borderColor: fixture.color}}>
-      <pre style={{textAlign: 'left'}}>
-        {fixture.shortName} {fixture.id}
-      </pre>
+    <div
+      className={styles.fixture}
+      style={{ borderColor: fixture.color, }}>
       <button
-        onClick={() => dispatch(setColor('grey'))}
-      > grey </button>
-      <button
-        onClick={() => dispatch(setColor('black'))}
-      > black </button>
-      <button
-        onClick={() => dispatch(setColor('white'))}
-      > white </button>
+        onClick={() => deleteFixture(fixture.id)}
+        className={styles.deleteButton}
+      >✗</button>
+      {fixture.shortName}
     </div>
   )
 }
