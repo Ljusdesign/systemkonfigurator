@@ -1,9 +1,10 @@
 import React from 'react'
 import Fixture from './Fixture'
+import styles from './FixtureList.module.css'
 
 function FixtureList({fixtures, deleteFixture }) {
   return (
-    <div style={{border: '1px dotted blue'}}>
+    <div className={styles.list}>
       {fixtures.map((fixture) => (
         <Fixture
           key={fixture.id}

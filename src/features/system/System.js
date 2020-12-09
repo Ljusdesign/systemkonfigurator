@@ -18,14 +18,22 @@ function System () {
   
   useEffect(() => {
     dispatch(totalVoltage())
+    dispatch(totalPower())
   }, [system.fixtures, dispatch])
+
+  const rounded = number => Math.round(number * 100) / 100
 
   return (
     <div className={styles.system}>
       <h2>Systemkonfigurator</h2>
 
-      <p>Spänningsfall: {system.totalVoltage}</p>
-      <button onClick={() => dispatch(reset())}>reset</button>
+      <p>Spänningsfall: {rounded(system.totalVoltage)}</p>
+      <p>Effekt: {rounded(system.totalPower)}</p>
+      <button
+        className={styles.reload}
+        onClick={() => dispatch(reset())}>
+          &#x21bb;
+      </button>
       {[...CCfixtures.keys()].map((name, value) => (
         <button
           key={value}
