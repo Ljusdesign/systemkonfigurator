@@ -8,6 +8,7 @@ import {
   deleteFixture,
   reset,
   totalVoltage,
+  totalPower,
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
 import CCfixtures from '../../products/CCfixtures'

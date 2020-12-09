@@ -3,7 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   fixtures: [],
   totalVoltage: 0,
+  totalPower: 0,
 }
+
 let fixtureId = 0
 export const systemSlice = createSlice({
   name: 'system',
@@ -36,7 +38,7 @@ export const systemSlice = createSlice({
   }
 })
 
-export const { addFixture, deleteFixture, reset, totalVoltage, setColor } = systemSlice.actions
+export const { addFixture, deleteFixture, reset, totalVoltage, totalPower, setColor } = systemSlice.actions
 
 export const selectSystem = state => state.system
 export const selectFixtures = state => state.system.fixtures
