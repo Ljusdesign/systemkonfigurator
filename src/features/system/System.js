@@ -14,6 +14,8 @@ import {
 import FixtureList from '../fixture/FixtureList'
 import CCfixtures from '../../products/CCfixtures'
 
+const ReloadSymbol = () => (<span>&#x21bb;</span>)
+
 function System () {
   const system = useSelector(selectSystem)
   const dispatch = useDispatch(systemSlice)
@@ -36,7 +38,7 @@ function System () {
       <button
         className={styles.reload}
         onClick={() => dispatch(reset())}>
-          &#x21bb;
+        <ReloadSymbol />
       </button>
       {[...CCfixtures.keys()].map((name, value) => (
         <button

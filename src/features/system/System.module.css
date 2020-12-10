@@ -3,5 +3,7 @@
 }
 
 .reload {
-  font-family: Lucida Sans Unicode
+  font-family: Lucida Sans Unicode;
+  font-size: 2em;
+  background: transparent;
 }
