@@ -26,9 +26,6 @@ export const systemSlice = createSlice({
         1
       )
     },
-    updateFixtureCurrent: state => {
-      state.fixtures.map(fix => fix.current = state.driver.current)
-    },
     totalVoltage: state => {
       state.totalVoltage = state.fixtures.reduce(
         (acc, curr) => acc + curr.voltage, 0
@@ -36,13 +33,11 @@ export const systemSlice = createSlice({
     },
     totalPower: state => {
       state.totalPower = state.fixtures.reduce(
-        (acc, curr) => acc + curr.current * curr.voltage, 0
+        (acc, curr) => acc + state.driver.current * curr.voltage, 0
       )
     },
     totalCurrent: state => {
-      state.totalCurrent = state.fixtures.reduce(
-        (acc, curr) => acc + curr.current, 0
-      )
+      state.totalCurrent = state.fixtures.reduce(acc => acc + state.driver.current , 0)
     },
     setColor: (state, action) => {
       const { id, color } = action

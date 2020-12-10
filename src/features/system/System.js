@@ -6,7 +6,6 @@ import {
   selectSystem,
   addFixture,
   deleteFixture,
-  updateFixtureCurrent,
   reset,
   totalVoltage,
   totalPower,
@@ -25,7 +24,6 @@ function System () {
     dispatch(totalVoltage())
     dispatch(totalPower())
     dispatch(totalCurrent())
-    dispatch(updateFixtureCurrent())
   }, [system.fixtures, dispatch])
 
   const rounded = number => Math.round(number * 100) / 100
@@ -50,7 +48,11 @@ function System () {
       ))}
 
       <h3>Fixtures:</h3>
-      <FixtureList fixtures={system.fixtures} deleteFixture={id => dispatch(deleteFixture(id))} />
+      <FixtureList
+        fixtures={system.fixtures}
+        deleteFixture={id => dispatch(deleteFixture(id))}
+        driverCurrent={system.driver.current}
+      />
 
       <pre style={{ textAlign: 'left' }}>
         State: {JSON.stringify(system, null, 2)}

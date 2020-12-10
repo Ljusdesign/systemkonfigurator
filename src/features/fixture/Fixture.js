@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Fixture.module.css'
 
-function Fixture({ fixture, deleteFixture }) {
+function Fixture({ fixture, deleteFixture, driverCurrent }) {
   return (
     <div
       className={styles.fixture}
@@ -11,6 +11,9 @@ function Fixture({ fixture, deleteFixture }) {
         className={styles.deleteButton}
       >✗</button>
       {fixture.shortName}
+      {driverCurrent > fixture.maxCurrent && (
+        <p>Current too high</p>
+      )}
     </div>
   )
 }
