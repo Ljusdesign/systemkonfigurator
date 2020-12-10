@@ -6,6 +6,7 @@ import {
   selectSystem,
   addFixture,
   deleteFixture,
+  updateFixtureCurrent,
   reset,
   totalVoltage,
   totalPower,
@@ -24,6 +25,7 @@ function System () {
     dispatch(totalVoltage())
     dispatch(totalPower())
     dispatch(totalCurrent())
+    dispatch(updateFixtureCurrent())
   }, [system.fixtures, dispatch])
 
   const rounded = number => Math.round(number * 100) / 100

@@ -1,6 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit'
+import CCdrivers from '../../products/CCdrivers'
 
 const initialState = {
+  driver: CCdrivers.get('LD30 dimmer'),
   fixtures: [],
   totalVoltage: 0,
   totalPower: 0,
@@ -13,13 +15,19 @@ export const systemSlice = createSlice({
   initialState,
   reducers: {
     addFixture: (state, action) => {
-      state.fixtures.push({...action.payload, id: fixtureId++})
+      state.fixtures.push({
+        ...action.payload,
+        id: fixtureId++,
+      })
     },
     deleteFixture: (state, action) => {
       state.fixtures.splice(
         state.fixtures.findIndex(fix => fix.id === action.payload),
         1
       )
+    },
+    updateFixtureCurrent: state => {
+      state.fixtures.map(fix => fix.current = state.driver.current)
     },
     totalVoltage: state => {
       state.totalVoltage = state.fixtures.reduce(
@@ -44,7 +52,7 @@ export const systemSlice = createSlice({
   }
 })
 
-export const { addFixture, deleteFixture, reset, totalVoltage, totalPower, totalCurrent, setColor } = systemSlice.actions
+export const { addFixture, deleteFixture, updateFixtureCurrent, reset, totalVoltage, totalPower, totalCurrent, setColor } = systemSlice.actions
 
 export const selectSystem = state => state.system
 export const selectFixtures = state => state.system.fixtures
