@@ -9,6 +9,7 @@ import {
   reset,
   totalVoltage,
   totalPower,
+  totalCurrent,
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
 import CCfixtures from '../../products/CCfixtures'
@@ -20,6 +21,7 @@ function System () {
   useEffect(() => {
     dispatch(totalVoltage())
     dispatch(totalPower())
+    dispatch(totalCurrent())
   }, [system.fixtures, dispatch])
 
   const rounded = number => Math.round(number * 100) / 100
@@ -30,6 +32,7 @@ function System () {
 
       <p>Spänningsfall: {rounded(system.totalVoltage)}</p>
       <p>Effekt: {rounded(system.totalPower)}</p>
+      <p>Ström: {rounded(system.totalCurrent)}</p>
       <button
         className={styles.reload}
         onClick={() => dispatch(reset())}>

@@ -4,6 +4,7 @@ const initialState = {
   fixtures: [],
   totalVoltage: 0,
   totalPower: 0,
+  totalCurrent: 0,
 }
 
 let fixtureId = 0
@@ -30,6 +31,11 @@ export const systemSlice = createSlice({
         (acc, curr) => acc + curr.current * curr.voltage, 0
       )
     },
+    totalCurrent: state => {
+      state.totalCurrent = state.fixtures.reduce(
+        (acc, curr) => acc + curr.current, 0
+      )
+    },
     setColor: (state, action) => {
       const { id, color } = action
       state.fixtures[id].color = color
@@ -38,7 +44,7 @@ export const systemSlice = createSlice({
   }
 })
 
-export const { addFixture, deleteFixture, reset, totalVoltage, totalPower, setColor } = systemSlice.actions
+export const { addFixture, deleteFixture, reset, totalVoltage, totalPower, totalCurrent, setColor } = systemSlice.actions
 
 export const selectSystem = state => state.system
 export const selectFixtures = state => state.system.fixtures
