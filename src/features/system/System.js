@@ -4,6 +4,7 @@ import styles from './System.module.css'
 import {
   systemSlice,
   selectSystem,
+  loadSystemDriver,
   addFixture,
   deleteFixture,
   reset,
@@ -13,6 +14,7 @@ import {
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
 import CCfixtures from '../../products/CCfixtures'
+import CCdrivers from '../../products/CCdrivers'
 
 const ReloadSymbol = () => (<span>&#x21bb;</span>)
 
@@ -28,10 +30,23 @@ function System () {
 
   const rounded = number => Math.round(number * 100) / 100
 
+  function changeDriver (event) {
+    dispatch(loadSystemDriver(event.target.value))
+  }
+
   return (
     <div className={styles.system}>
       <h2>Systemkonfigurator</h2>
 
+      <h3>Drivdon</h3>
+      <select value={system.driver} onChange={changeDriver}>
+        <option value={null}>Select driver</option>
+        {[...CCdrivers.keys()].map((name, value) => (
+          <option
+            value={name}
+          >{name}</option>
+        ))}
+      </select>
       <p>Spänningsfall: {rounded(system.totalVoltage)}</p>
       <p>Effekt: {rounded(system.totalPower)}</p>
       <p>Ström: {rounded(system.totalCurrent)}</p>
@@ -51,7 +66,7 @@ function System () {
       <FixtureList
         fixtures={system.fixtures}
         deleteFixture={id => dispatch(deleteFixture(id))}
-        driverCurrent={system.driver.current}
+        driverCurrent={system.driver.settings.current}
       />
 
       <pre style={{ textAlign: 'left' }}>
