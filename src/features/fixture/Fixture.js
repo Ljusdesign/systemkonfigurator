@@ -12,7 +12,7 @@ function Fixture({ fixture, deleteFixture, driverCurrent }) {
       >✗</button>
       {fixture.shortName}
       {driverCurrent > fixture.maxCurrent && (
-        <p>Current too high</p>
+        <span>Current too high</span>
       )}
     </div>
   )
