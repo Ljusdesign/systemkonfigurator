@@ -71,10 +71,6 @@ function System() {
         <p>
           {system.driver.name}
         </p>
-        <p>
-
-          {system.driver.name}
-        </p>
         <Meter
           name='Effekt'
           max={system.driver.settings.maxPower}
@@ -108,7 +104,6 @@ function System() {
         >{name}</button>
       ))}
 
-      <h3>Armaturer</h3>
       <FixtureList
         fixtures={system.fixtures}
         deleteFixture={id => dispatch(deleteFixture(id))}
