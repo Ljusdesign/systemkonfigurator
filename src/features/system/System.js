@@ -29,6 +29,7 @@ function Meter ({
   let conditionalStyle = {
     padding: '5px',
   }
+  if (currentValue < min) conditionalStyle.background = 'yellow'
   if (currentValue > max) conditionalStyle.background = 'red'
   return (
     <div style={conditionalStyle}>
