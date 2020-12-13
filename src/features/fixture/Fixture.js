@@ -15,9 +15,9 @@ function Fixture({ fixture, deleteFixture, driverCurrent }) {
         onClick={() => deleteFixture(fixture.id)}
         className={styles.deleteButton}
       >✗</button>
-      {fixture.shortName}
+      <div className={styles.text}>{fixture.shortName}</div>
       {driverCurrent > fixture.maxCurrent && (
-        <span>Current too high</span>
+        <span className={styles.highCurrent}>&#128498;</span>
       )}
     </div>
   )

@@ -1,29 +1,36 @@
 .fixture {
   position: relative;
-  width: 100px;
-  height: 100px;
+  display: inline-block;
+  width: 75px;
+  height: 75px;
   margin: 5px;
   padding: 5px;
   border: 1px solid #ddd;
-  display: inline-block;
-  text-align: center;
 }
 
 .text {
   position: absolute;
   bottom: 0;
+  left: 0;
+  padding-right: 15px;
+}
+
+.highCurrent {
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
 
 .deleteButton {
-  position: relative;
-  background: #eef;
+  position: absolute;
+  background: #f4f4f4;
   float: right;
-  top: 0;
-  right: 0;
+  top: -5px;
+  right: -5px;
   border: 1px solid grey;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 .deleteButton:hover {
   background: #ccc;

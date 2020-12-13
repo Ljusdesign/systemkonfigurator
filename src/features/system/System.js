@@ -62,17 +62,19 @@ function System () {
         >{name}</button>
       ))}
 
-      <h3>Fixtures:</h3>
+      <h3>Armaturer</h3>
       <FixtureList
         fixtures={system.fixtures}
         deleteFixture={id => dispatch(deleteFixture(id))}
         driverCurrent={system.driver.settings.current}
       />
 
-      <pre style={{ textAlign: 'left' }}>
-        State: {JSON.stringify(system, null, 2)}
-      </pre>
-    </div>
+      <div>
+        <pre className={styles.json}>
+          State: {JSON.stringify(system, null, 2)}
+        </pre>
+      </div>
+    </>
   )
 }
 
