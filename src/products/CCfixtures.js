@@ -4,6 +4,7 @@ const CCfixtures = new Map([
     shortName: "Arty Par",
     voltage: 12,
     maxCurrent: 0.5,
+    image: 'arty-par-pt.jpg',
   }],
   ['Arty Profile', {
     name: 'Arty Profile Zoom CC for LED-profile',
