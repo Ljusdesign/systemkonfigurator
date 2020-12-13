@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './Fixture.module.css'
 
-function Fixture({ fixture, deleteFixture, driverCurrent }) {
+function Fixture({ fixture, index, deleteFixture, driverCurrent }) {
   const background = `url(${process.env.PUBLIC_URL}/images/${fixture.image})`
   return (
     <div
@@ -11,6 +11,7 @@ function Fixture({ fixture, deleteFixture, driverCurrent }) {
         backgroundSize: 'contain',
       }}
     >
+      {index+1}
       <button
         onClick={() => deleteFixture(fixture.id)}
         className={styles.deleteButton}

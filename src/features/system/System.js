@@ -61,6 +61,9 @@ function System() {
           ))}
         </select>
         <p>
+          {system.driver.name}
+        </p>
+        <p>
 
           {system.driver.name}
         </p>
