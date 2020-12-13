@@ -17,21 +17,28 @@ import CCfixtures from '../../products/CCfixtures'
 import CCdrivers from '../../products/CCdrivers'
 
 const ReloadSymbol = () => (<span>&#x21bb;</span>)
+const LightningSymbol = () => (<span>&#128498;</span>)
 
-const Meter = ({
+function Meter ({
   name,
   currentValue,
   min,
   max,
   unit,
-}) => (
-  <div>
-    {min ?
-      `${name} ${currentValue}/${min}-${max} ${unit}` :
-      `${name} ${currentValue}/${max} ${unit}`
-    }
-  </div>
-)
+}) {
+  let conditionalStyle = {
+    padding: '5px',
+  }
+  if (currentValue > max) conditionalStyle.background = 'red'
+  return (
+    <div style={conditionalStyle}>
+      {min ?
+        `${name} ${currentValue}/${min}-${max} ${unit}` :
+        `${name} ${currentValue}/${max} ${unit}`
+      }
+    </div>
+  )
+}
 
 function System() {
   const system = useSelector(selectSystem)
@@ -85,6 +92,7 @@ function System() {
           max={5}
           currentValue={rounded(system.totalCurrent)}
           unit='A'
+          symbol={LightningSymbol}
         />
       </div>
       <button
