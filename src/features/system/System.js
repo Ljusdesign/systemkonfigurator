@@ -52,18 +52,18 @@ function System() {
   return (
     <>
       <div className={styles.system}>
-          <h3>Drivdon</h3>
-              <select value={system.driver.index} onChange={changeDriver}>
-                {[...CCdrivers.keys()].map((name, value) => (
-                  <option
-                    value={name}
-                  >{name}</option>
-                ))}
-              </select>
-              <p>
+        <h3>Drivdon</h3>
+        <select value={system.driver.index} onChange={changeDriver}>
+          {[...CCdrivers.keys()].map((name, value) => (
+            <option
+              value={name}
+            >{name}</option>
+          ))}
+        </select>
+        <p>
 
-                {system.driver.name}
-              </p>
+          {system.driver.name}
+        </p>
         <Meter
           name='Effekt'
           max={system.driver.settings.maxPower}
