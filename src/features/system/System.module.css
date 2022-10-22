@@ -1,5 +1,8 @@
 .system {
-  display: flex;
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: space-between;
   padding: 1em;
   border-bottom: 1px dotted #153055;
   width: 100%;
@@ -11,32 +14,29 @@
 
 .driver {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  flex-grow: auto;
-}
-.driver * > label {
-  display: block;
-}
-.driverType {
-  flex-grow: auto;
-  max-width: 25em;
-  margin-right: 4em;
-}
-.setting {
-  flex-grow: auto;
-  max-width: 25em;
-  margin-right: 4em;
-}
-.setting *> label {
-  display: block;
-}
-.features {
-  flex-grow: auto;
-  max-width: 15em;
+  gap: 2em;
 }
 
-.reload > span {
+.driver *>label {
+  display: block;
+}
+
+.driverType {
+  min-width: 100px;
+}
+
+.setting {
+  min-width: 100px;
+}
+
+.setting *>label {
+  display: block;
+}
+
+.features {
+}
+
+.reload>span {
   font-family: Lucida Sans Unicode;
   font-size: 2em;
   background: transparent;
@@ -48,6 +48,7 @@
   display: flex;
   width: 30em;
 }
+
 .meter {
   margin: 1em;
   border: 3px dashed transparent;
@@ -59,12 +60,7 @@ table {
   width: 100%;
   max-width: 10em;
 }
+
 tr {
   border-bottom: 1px solid #7d8da2;
-}
-
-@media only screen and (max-width: 570px) {
-  .system {
-    flex-direction: column;
-  }
 }
