@@ -11,7 +11,6 @@ import {
   reset,
   totalVoltage,
   totalPower,
-  totalCurrent,
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
 import CCfixtures from '../../products/CCfixtures'
@@ -22,21 +21,22 @@ const LightningSymbol = () => (<span>&#128498;</span>)
 
 function Meter({
   name,
-  currentValue,
-  min,
-  max,
+  value,
+  low = 1,
+  high,
   unit,
 }) {
-  let conditionalStyle = {
-    padding: '5px',
-  }
-  if (currentValue < min) conditionalStyle.background = 'yellow'
-  if (currentValue > max) conditionalStyle.background = 'red'
   return (
-    <div style={conditionalStyle}>
-      {min ?
-        `${name} ${currentValue}/${min}-${max} ${unit}` :
-        `${name} ${currentValue}/${max} ${unit}`
+    <div className={styles.meter}>
+      <label for="meter">{name}: <br /></label>
+      {value < high ?
+        <meter low={low} max={high} value={value}>{value}</meter> :
+        <meter low={low} high={high} optimum={0} max={high*1.1} value={value}>{value}</meter>
+      }
+      <br />
+      {low ?
+        `${value} (${low}-${high} ${unit})` :
+        `${value} (${high} ${unit})`
       }
     </div>
   )
@@ -49,7 +49,6 @@ function System() {
   useEffect(() => {
     dispatch(totalVoltage())
     dispatch(totalPower())
-    dispatch(totalCurrent())
   }, [system.fixtures, dispatch])
 
   const rounded = number => Math.round(number * 100) / 100
@@ -79,14 +78,30 @@ function System() {
               ))}
             </select>
 
-        <div
-          style={{
-            backgroundImage: driverImage,
-            backgroundSize: 'contain',
-            width: '10em',
-            height: '10em',
-          }}
-        ></div>
+            <div
+              style={{
+                backgroundImage: driverImage,
+                backgroundSize: 'contain',
+                width: '10em',
+                height: '10em',
+              }}
+            ></div>
+            <div className={styles.meters}>
+              <Meter
+                name='Effekt'
+                low={system.driver.selectedSetting.minPower}
+                high={system.driver.selectedSetting.maxPower}
+                value={rounded(system.totalPower)}
+                unit='W'
+              />
+              <Meter
+                name='Spänning'
+                low={system.driver.selectedSetting.minVoltage}
+                high={system.driver.selectedSetting.maxVoltage}
+                value={rounded(system.totalVoltage)}
+                unit='V'
+              />
+            </div>
           </div>
           <div className={styles.setting}>
             <h3>Inställning</h3>
@@ -127,28 +142,9 @@ function System() {
               </tr>
             </table>
           </div>
+
         </div>
 
-        <Meter
-          name='Effekt'
-          max={system.driver.selectedSetting.maxPower}
-          currentValue={rounded(system.totalPower)}
-          unit='W'
-        />
-        <Meter
-          name='Spänning'
-          min={system.driver.selectedSetting.minVoltage}
-          max={system.driver.selectedSetting.maxVoltage}
-          currentValue={rounded(system.totalVoltage)}
-          unit='V'
-        />
-        <Meter
-          name='Ström'
-          max={5}
-          currentValue={rounded(system.totalCurrent)}
-          unit='A'
-          symbol={LightningSymbol}
-        />
       </div>
       <button
         className={styles.reload}

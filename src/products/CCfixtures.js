@@ -6,6 +6,14 @@ const CCfixtures = new Map([
     maxCurrent: 0.5,
     image: 'arty-par-pt.jpg',
   }],
+  ['Arty Zoom', {
+    name: 'Arty Zoom / CC 450lm LED-profile',
+    shortName: "Arty Zoom B",
+    artNo: 'ARTZ##B-CCL-*',
+    voltage: 12,
+    maxCurrent: 0.5,
+    image: 'arty-zoom-pt.jpg',
+  }],
   ['Arty Framer', {
     name: 'Arty Framer CC for LED-profile',
     shortName: "Arty Framer",

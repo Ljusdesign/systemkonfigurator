@@ -17,6 +17,15 @@
   background: transparent;
 }
 
+.meters {
+  display: flex;
+  width: 30em;
+}
+.meter {
+  margin: 1em;
+  border: 3px dashed transparent;
+}
+
 table {
   width: 100%;
 }

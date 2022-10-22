@@ -40,9 +40,6 @@ export const systemSlice = createSlice({
         (acc, curr) => acc + state.driver.selectedSetting.current * curr.voltage, 0
       )
     },
-    totalCurrent: state => {
-      state.totalCurrent = state.fixtures.reduce(acc => acc + state.driver.selectedSetting.current , 0)
-    },
     setColor: (state, action) => {
       const { id, color } = action
       state.fixtures[id].color = color
