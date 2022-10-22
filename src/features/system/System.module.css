@@ -1,8 +1,7 @@
 .system {
   display: flex;
-  justify-content: space-between;
   padding: 1em;
-  border-bottom: 4px dotted #153055;
+  border-bottom: 1px dotted #153055;
   width: 100%;
 }
 
@@ -13,21 +12,28 @@
 .driver {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  justify-content: space-between;
+  flex-grow: auto;
 }
-.driver *> label {
+.driver * > label {
   display: block;
 }
 .driverType {
-  width: 30%;
+  flex-grow: auto;
+  max-width: 25em;
+  margin-right: 4em;
 }
 .setting {
-  width: 30%;
-  max-width: 10em;
-  flex-grow: 3;
+  flex-grow: auto;
+  max-width: 25em;
+  margin-right: 4em;
 }
 .setting *> label {
   display: block;
+}
+.features {
+  flex-grow: auto;
+  max-width: 15em;
 }
 
 .reload > span {
@@ -48,5 +54,17 @@
 }
 
 table {
+  margin: 0.6em;
+  margin-top: 1em;
   width: 100%;
+  max-width: 10em;
+}
+tr {
+  border-bottom: 1px solid #7d8da2;
+}
+
+@media only screen and (max-width: 570px) {
+  .system {
+    flex-direction: column;
+  }
 }

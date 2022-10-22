@@ -72,7 +72,7 @@ function System() {
       <div className={styles.system}>
         <div className={styles.driver}>
           <div className={styles.driverType}>
-            <h2>Driver</h2>
+            <h3>Driver</h3>
             <form>
               {[...CCdrivers.keys()].map((name, value) => (
                 <label key={name}>
@@ -90,7 +90,7 @@ function System() {
           </div>
 
           <div className={styles.setting}>
-            <h2>Setting</h2>
+            <h3>Setting</h3>
             <form onSubmit={changeSetting}>
               {system.driver.settings.map(setting => (
                 <label key={setting.name}>
@@ -106,15 +106,8 @@ function System() {
             </form>
           </div>
         </div>
-        <div>
-          <div
-            style={{
-              backgroundImage: driverImage,
-              backgroundSize: 'contain',
-              width: '10em',
-              height: '10em',
-            }}
-          ></div>
+        <div className={styles.features}>
+          <h3>Features</h3>
           <table>
             <tbody>
               <tr>
@@ -131,6 +124,16 @@ function System() {
               </tr>
             </tbody>
           </table>
+          {driverImage ?
+          <div
+            style={{
+              backgroundImage: driverImage,
+              backgroundSize: 'contain',
+              width: '10em',
+              height: '10em',
+            }}
+          ></div>
+          : null}
         </div>
       </div>
       <div>
