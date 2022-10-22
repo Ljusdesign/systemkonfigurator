@@ -28,10 +28,10 @@ function Meter({
 }) {
   return (
     <div className={styles.meter}>
-      <label htmlFor="meter">{name}: <br /></label>
+      <label htmlFor="meter">{name}<br /></label>
       {value < high ?
         <meter low={low} max={high} value={value}>{value}</meter> :
-        <meter low={low} high={high} optimum={0} max={high*1.01} value={value}>{value}</meter>
+        <meter low={low} high={high} optimum={0} max={high * 1.01} value={value}>{value}</meter>
       }
       <br />
       {low ?
