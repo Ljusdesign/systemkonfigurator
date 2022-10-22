@@ -135,6 +135,34 @@ const drivers = new Map([
       },
     ]
   }],
+  ['LED-10', {
+    name: 'Plejd LED-driver 10W',
+    shortName: 'LED-10',
+    artNo: 'LED-10',
+    settings: [
+      {
+        name: '150mA',
+        current: 0.150,
+        minVoltage: 6.7,
+        maxVoltage: 26.7,
+        maxPower: 4,
+      },
+      {
+        name: '500mA',
+        current: 0.500,
+        minVoltage: 2.86,
+        maxVoltage: 25,
+        maxPower: 9,
+      },
+      {
+        name: '700mA',
+        current: 0.700,
+        minVoltage: 2,
+        maxVoltage: 20,
+        maxPower: 10,
+      },
+    ]
+  }],
 ])
 
 function loadDriver (name = 'LD30 dimmer', setting = '700mA') {
