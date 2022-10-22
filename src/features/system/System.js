@@ -5,6 +5,7 @@ import {
   systemSlice,
   selectSystem,
   loadSystemDriver,
+  loadSystemDriverSetting,
   addFixture,
   deleteFixture,
   reset,
@@ -19,7 +20,7 @@ import CCdrivers from '../../products/CCdrivers'
 const ReloadSymbol = () => (<span>&#x21bb;</span>)
 const LightningSymbol = () => (<span>&#128498;</span>)
 
-function Meter ({
+function Meter({
   name,
   currentValue,
   min,
@@ -55,32 +56,89 @@ function System() {
 
   function changeDriver(event) {
     dispatch(loadSystemDriver(event.target.value))
+    dispatch(loadSystemDriverSetting(system.driver.selectedSetting.name))
   }
+  function changeSetting(event) {
+    dispatch(loadSystemDriverSetting(event.target.value))
+  }
+
+  const driverImage = `url(${process.env.PUBLIC_URL}/images/${system.driver.image})`
 
   return (
     <>
       <div className={styles.system}>
-        <h3>Drivdon</h3>
-        <select value={system.driver.index} onChange={changeDriver}>
-          {[...CCdrivers.keys()].map((name, value) => (
-            <option
-              value={name}
-            >{name}</option>
-          ))}
-        </select>
-        <p>
-          {system.driver.name}
-        </p>
+        <div className={styles.driver}>
+          <div>
+            <h3>Drivdon</h3>
+            <select value={system.driver.index} onChange={changeDriver}>
+              {[...CCdrivers.keys()].map((name, value) => (
+                <option
+                  key={value}
+                  value={name}
+                >{name}</option>
+              ))}
+            </select>
+
+        <div
+          style={{
+            backgroundImage: driverImage,
+            backgroundSize: 'contain',
+            width: '10em',
+            height: '10em',
+          }}
+        ></div>
+          </div>
+          <div className={styles.setting}>
+            <h3>Inställning</h3>
+            <select value={system.driver.selectedSetting.name} onChange={changeSetting}>
+              {system.driver.settings.map((settingName, value) => (
+                <option
+                  key={value}
+                  value={settingName.name}
+                >{settingName.name}</option>
+              ))}
+            </select>
+            <h3>Inställning</h3>
+            <form onSubmit={changeSetting}>
+              {system.driver.settings.map(setting => (
+                <label key={setting.name}>
+                  <input
+                    type="radio"
+                    value={setting.name}
+                    checked={setting.name === system.driver.selectedSetting.name}
+                    onChange={e => changeSetting(e)}
+                  />
+                  {setting.name}
+                </label>
+              ))}
+            </form>
+            <table>
+              <tr>
+                <td>Min voltage</td>
+                <td>{system.driver.selectedSetting.minVoltage}</td>
+              </tr>
+              <tr>
+                <td>Max voltage</td>
+                <td>{system.driver.selectedSetting.maxVoltage}</td>
+              </tr>
+              <tr>
+                <td>Max power</td>
+                <td>{system.driver.selectedSetting.maxPower}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
         <Meter
           name='Effekt'
-          max={system.driver.settings.maxPower}
+          max={system.driver.selectedSetting.maxPower}
           currentValue={rounded(system.totalPower)}
           unit='W'
         />
         <Meter
           name='Spänning'
-          min={system.driver.settings.minVoltage}
-          max={system.driver.settings.maxVoltage}
+          min={system.driver.selectedSetting.minVoltage}
+          max={system.driver.selectedSetting.maxVoltage}
           currentValue={rounded(system.totalVoltage)}
           unit='V'
         />
@@ -107,7 +165,7 @@ function System() {
       <FixtureList
         fixtures={system.fixtures}
         deleteFixture={id => dispatch(deleteFixture(id))}
-        driverCurrent={system.driver.settings.current}
+        driverCurrent={system.driver.selectedSetting.current}
       />
 
       <div>

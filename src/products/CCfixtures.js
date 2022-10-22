@@ -1,14 +1,14 @@
 const CCfixtures = new Map([
-  ['Arty Par', {
-    name: 'Arty Par CC for LED-profile',
-    shortName: "Arty Par",
+  ['Arty Accent', {
+    name: 'Arty Accent CC for LED-profile',
+    shortName: "Arty Accent",
     voltage: 12,
     maxCurrent: 0.5,
     image: 'arty-par-pt.jpg',
   }],
-  ['Arty Profile', {
-    name: 'Arty Profile Zoom CC for LED-profile',
-    shortName: "Arty Profile",
+  ['Arty Framer', {
+    name: 'Arty Framer CC for LED-profile',
+    shortName: "Arty Framer",
     voltage: 12,
     maxCurrent: 0.5,
     image: 'arty-profile-zoom-pt.jpg',

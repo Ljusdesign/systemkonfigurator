@@ -2,8 +2,21 @@
   padding: 1em;
 }
 
+.driver {
+  display: flex;
+  justify-content: space-around;
+}
+.setting {
+  width: 100%;
+  max-width: 10em;
+}
+
 .reload {
   font-family: Lucida Sans Unicode;
   font-size: 2em;
   background: transparent;
+}
+
+table {
+  width: 100%;
 }
