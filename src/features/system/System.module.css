@@ -45,8 +45,8 @@
 }
 
 .meters {
-  display: flex;
-  width: 30em;
+  display: inline-flex;
+  gap: 2em;
 }
 
 .meter {
@@ -63,4 +63,11 @@ table {
 
 tr {
   border-bottom: 1px solid #7d8da2;
+}
+
+.json {
+  overflow: hidden;
+  border-top: 1px dotted #153055;
+  padding-top: 1em;
+  margin-top: 2em;
 }
