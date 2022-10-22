@@ -62,11 +62,12 @@ function System() {
   }
 
   const driverImage = `url(${process.env.PUBLIC_URL}/images/${system.driver.image})`
+  const logoImage = `${process.env.PUBLIC_URL}/images/systemkonfigurator.png`
 
   return (
     <>
       <div className={styles.top}>
-        <img src="/images/systemkonfigurator.png" alt="systemkonfigurator logo" width="200" />
+        <img src={logoImage} alt="systemkonfigurator logo" width="200" />
       </div>
       <div className={styles.system}>
         <div className={styles.driver}>
