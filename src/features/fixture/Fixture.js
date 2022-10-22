@@ -1,8 +1,11 @@
 import React from 'react'
 import styles from './Fixture.module.css'
 
+
 function Fixture({ fixture, index, deleteFixture, driverCurrent }) {
   const background = `url(${process.env.PUBLIC_URL}/images/${fixture.image})`
+  const highCurrent = `${process.env.PUBLIC_URL}/images/electricity-caution.svg`
+
   return (
     <div
       className={styles.fixture}
@@ -18,7 +21,9 @@ function Fixture({ fixture, index, deleteFixture, driverCurrent }) {
       >✗</button>
       <div className={styles.text}>{fixture.shortName}</div>
       {driverCurrent > fixture.maxCurrent && (
-        <span className={styles.highCurrent}>&#128498;</span>
+        <span className={styles.highCurrent}>
+          <img width="20" height="20" src={highCurrent} alt="Current too high" />
+        </span>
       )}
     </div>
   )
