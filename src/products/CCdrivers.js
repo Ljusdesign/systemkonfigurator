@@ -165,7 +165,7 @@ const drivers = new Map([
   }],
 ])
 
-function loadDriver (name = 'LD30 dimmer', setting = '700mA') {
+function loadDriver (name = 'Maxi Jolly', setting = '700mA') {
   return produce(drivers.get(name), driver => {
     driver.index = name
     const settingIndex = driver.settings.findIndex(s => s.name === setting) || 0
