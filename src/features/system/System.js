@@ -66,39 +66,30 @@ function System() {
   return (
     <>
       <div className={styles.top}>
-        <img src="/images/systemkonfigurator.png" width="200" />
+        <img src="/images/systemkonfigurator.png" alt="systemkonfigurator logo" width="200" />
       </div>
       <div className={styles.system}>
         <div className={styles.driver}>
-          <h2>Drivdon</h2>
           <div className={styles.driverType}>
+            <h2>Driver</h2>
             <form>
               {[...CCdrivers.keys()].map((name, value) => (
                 <label key={name}>
-                <input
-                  type="radio"
-                  key={value}
-                  value={name}
-                  checked={system.driver.index === name}
-                  onChange={e => changeDriver(e)}
-                /> {name}
+                  <input
+                    type="radio"
+                    key={value}
+                    value={name}
+                    checked={system.driver.index === name}
+                    onChange={e => changeDriver(e)}
+                  /> {name}
                 </label>
               ))}
             </form>
 
-            <div
-              style={{
-                backgroundImage: driverImage,
-                backgroundSize: 'contain',
-                width: '10em',
-                height: '10em',
-              }}
-            ></div>
-
           </div>
 
           <div className={styles.setting}>
-            <h3>Inställning</h3>
+            <h2>Setting</h2>
             <form onSubmit={changeSetting}>
               {system.driver.settings.map(setting => (
                 <label key={setting.name}>
@@ -112,53 +103,70 @@ function System() {
                 </label>
               ))}
             </form>
-            <table>
-              <tbody>
-                <tr>
-                  <td>Min voltage</td>
-                  <td>{system.driver.selectedSetting.minVoltage}</td>
-                </tr>
-                <tr>
-                  <td>Max voltage</td>
-                  <td>{system.driver.selectedSetting.maxVoltage}</td>
-                </tr>
-                <tr>
-                  <td>Max power</td>
-                  <td>{system.driver.selectedSetting.maxPower}</td>
-                </tr>
-              </tbody>
-            </table>
           </div>
+        </div>
+        <div>
+          <div
+            style={{
+              backgroundImage: driverImage,
+              backgroundSize: 'contain',
+              width: '10em',
+              height: '10em',
+            }}
+          ></div>
+          <table>
+            <tbody>
+              <tr>
+                <td>Min voltage</td>
+                <td>{system.driver.selectedSetting.minVoltage}</td>
+              </tr>
+              <tr>
+                <td>Max voltage</td>
+                <td>{system.driver.selectedSetting.maxVoltage}</td>
+              </tr>
+              <tr>
+                <td>Max power</td>
+                <td>{system.driver.selectedSetting.maxPower}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div>
+        <div>
           <div className={styles.meters}>
             <Meter
-              name='Effekt'
+              name='Power'
               low={system.driver.selectedSetting.minPower}
               high={system.driver.selectedSetting.maxPower}
               value={rounded(system.totalPower)}
               unit='W'
             />
             <Meter
+              name='Voltage'
               low={system.driver.selectedSetting.minVoltage}
               high={system.driver.selectedSetting.maxVoltage}
               value={rounded(system.totalVoltage)}
               unit='V'
             />
           </div>
-
         </div>
 
-      </div>
+      </div >
+
       <button
         className={styles.reload}
         onClick={() => dispatch(reset())}>
         <ReloadSymbol />
       </button>
-      {[...CCfixtures.keys()].map((name, value) => (
-        <button
-          key={value}
-          onClick={() => dispatch(addFixture(CCfixtures.get(name)))}
-        >{name}</button>
-      ))}
+      {
+        [...CCfixtures.keys()].map((name, value) => (
+          <button
+            key={value}
+            onClick={() => dispatch(addFixture(CCfixtures.get(name)))}
+          >{name}</button>
+        ))
+      }
 
       <FixtureList
         fixtures={system.fixtures}

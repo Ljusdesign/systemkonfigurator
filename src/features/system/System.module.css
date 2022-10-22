@@ -1,5 +1,9 @@
 .system {
+  display: flex;
+  justify-content: space-between;
   padding: 1em;
+  border-bottom: 4px dotted #153055;
+  width: 100%;
 }
 
 .top {
@@ -7,15 +11,23 @@
 }
 
 .driver {
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+.driver *> label {
+  display: block;
 }
 .driverType {
-  display: flex;
-  justify-content: space-around;
+  width: 30%;
 }
 .setting {
-  width: 100%;
+  width: 30%;
   max-width: 10em;
+  flex-grow: 3;
+}
+.setting *> label {
+  display: block;
 }
 
 .reload > span {
