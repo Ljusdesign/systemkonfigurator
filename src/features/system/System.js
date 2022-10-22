@@ -31,7 +31,7 @@ function Meter({
       <label htmlFor="meter">{name}: <br /></label>
       {value < high ?
         <meter low={low} max={high} value={value}>{value}</meter> :
-        <meter low={low} high={high} optimum={0} max={high*1.1} value={value}>{value}</meter>
+        <meter low={low} high={high} optimum={0} max={high*1.01} value={value}>{value}</meter>
       }
       <br />
       {low ?
