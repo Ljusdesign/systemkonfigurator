@@ -107,7 +107,7 @@ function System() {
           </div>
         </div>
         <div className={styles.features}>
-          <h3>Features</h3>
+          <h3>{system.driver.name}</h3>
           <table>
             <tbody>
               <tr>
