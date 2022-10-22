@@ -46,7 +46,7 @@ const CCfixtures = new Map([
     name: 'Gizmo CC for LED-profile',
     shortName: "Gimmick",
     voltage: 3,
-    maxCurrent: 0.7,
+    maxCurrent: 0.350,
     image: 'gimmick-pt.jpg',
   }],
 ])

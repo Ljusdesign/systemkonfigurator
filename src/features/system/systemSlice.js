@@ -4,6 +4,8 @@ import { loadDriver } from '../../products/CCdrivers'
 const initialState = {
   driver: loadDriver(),
   fixtures: [],
+  totalPower: 0,
+  totalVoltage: 0,
 }
 
 let fixtureId = 0
@@ -15,8 +17,10 @@ export const systemSlice = createSlice({
       state.driver = loadDriver(action.payload)
     },
     loadSystemDriverSetting: (state, action) => {
-      const index = state.driver.settings.findIndex(setting => setting.name === action.payload)
-      state.driver.selectedSetting = state.driver.settings[index]
+      const index = state.driver.settings.findIndex(setting => setting.name === action.payload) || 0
+      state.driver.settings[index] ?
+        state.driver.selectedSetting = state.driver.settings[index] :
+        state.driver.selectedSetting = state.driver.settings[0]
     },
     addFixture: (state, action) => {
       state.fixtures.push({

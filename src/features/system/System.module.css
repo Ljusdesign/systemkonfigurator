@@ -2,7 +2,14 @@
   padding: 1em;
 }
 
+.top {
+  height: 100px;
+}
+
 .driver {
+  display: inline-block;
+}
+.driverType {
   display: flex;
   justify-content: space-around;
 }
@@ -11,10 +18,12 @@
   max-width: 10em;
 }
 
-.reload {
+.reload > span {
   font-family: Lucida Sans Unicode;
   font-size: 2em;
   background: transparent;
+  width: 4em;
+  height: 4em;
 }
 
 .meters {

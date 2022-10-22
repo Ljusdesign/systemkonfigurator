@@ -28,7 +28,7 @@ function Meter({
 }) {
   return (
     <div className={styles.meter}>
-      <label for="meter">{name}: <br /></label>
+      <label htmlFor="meter">{name}: <br /></label>
       {value < high ?
         <meter low={low} max={high} value={value}>{value}</meter> :
         <meter low={low} high={high} optimum={0} max={high*1.1} value={value}>{value}</meter>
@@ -65,18 +65,26 @@ function System() {
 
   return (
     <>
+      <div className={styles.top}>
+        <img src="/images/systemkonfigurator.png" width="200" />
+      </div>
       <div className={styles.system}>
         <div className={styles.driver}>
-          <div>
-            <h3>Drivdon</h3>
-            <select value={system.driver.index} onChange={changeDriver}>
+          <h2>Drivdon</h2>
+          <div className={styles.driverType}>
+            <form>
               {[...CCdrivers.keys()].map((name, value) => (
-                <option
+                <label key={name}>
+                <input
+                  type="radio"
                   key={value}
                   value={name}
-                >{name}</option>
+                  checked={system.driver.index === name}
+                  onChange={e => changeDriver(e)}
+                /> {name}
+                </label>
               ))}
-            </select>
+            </form>
 
             <div
               style={{
@@ -86,33 +94,10 @@ function System() {
                 height: '10em',
               }}
             ></div>
-            <div className={styles.meters}>
-              <Meter
-                name='Effekt'
-                low={system.driver.selectedSetting.minPower}
-                high={system.driver.selectedSetting.maxPower}
-                value={rounded(system.totalPower)}
-                unit='W'
-              />
-              <Meter
-                name='Spänning'
-                low={system.driver.selectedSetting.minVoltage}
-                high={system.driver.selectedSetting.maxVoltage}
-                value={rounded(system.totalVoltage)}
-                unit='V'
-              />
-            </div>
+
           </div>
+
           <div className={styles.setting}>
-            <h3>Inställning</h3>
-            <select value={system.driver.selectedSetting.name} onChange={changeSetting}>
-              {system.driver.settings.map((settingName, value) => (
-                <option
-                  key={value}
-                  value={settingName.name}
-                >{settingName.name}</option>
-              ))}
-            </select>
             <h3>Inställning</h3>
             <form onSubmit={changeSetting}>
               {system.driver.settings.map(setting => (
@@ -128,19 +113,36 @@ function System() {
               ))}
             </form>
             <table>
-              <tr>
-                <td>Min voltage</td>
-                <td>{system.driver.selectedSetting.minVoltage}</td>
-              </tr>
-              <tr>
-                <td>Max voltage</td>
-                <td>{system.driver.selectedSetting.maxVoltage}</td>
-              </tr>
-              <tr>
-                <td>Max power</td>
-                <td>{system.driver.selectedSetting.maxPower}</td>
-              </tr>
+              <tbody>
+                <tr>
+                  <td>Min voltage</td>
+                  <td>{system.driver.selectedSetting.minVoltage}</td>
+                </tr>
+                <tr>
+                  <td>Max voltage</td>
+                  <td>{system.driver.selectedSetting.maxVoltage}</td>
+                </tr>
+                <tr>
+                  <td>Max power</td>
+                  <td>{system.driver.selectedSetting.maxPower}</td>
+                </tr>
+              </tbody>
             </table>
+          </div>
+          <div className={styles.meters}>
+            <Meter
+              name='Effekt'
+              low={system.driver.selectedSetting.minPower}
+              high={system.driver.selectedSetting.maxPower}
+              value={rounded(system.totalPower)}
+              unit='W'
+            />
+            <Meter
+              low={system.driver.selectedSetting.minVoltage}
+              high={system.driver.selectedSetting.maxVoltage}
+              value={rounded(system.totalVoltage)}
+              unit='V'
+            />
           </div>
 
         </div>
