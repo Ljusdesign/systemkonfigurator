@@ -1,4 +1,12 @@
 .list {
   border: 1px solid black;
   min-height: 230px;
+  display: grid;
+  justify-content: flex-start;
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
+  gap: 1em;
+  padding: 1em;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
 }
