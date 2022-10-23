@@ -13,8 +13,8 @@ import {
   totalPower,
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
-import CCfixtures from '../../products/CCfixtures'
-import CCdrivers from '../../products/CCdrivers'
+import CCfixtures from '../../products/fixtures/CCfixtures'
+import CCdrivers from '../../products/drivers/CCdrivers'
 
 const ReloadSymbol = () => (<span>&#x21bb;</span>)
 const LightningSymbol = () => (<span>&#128498;</span>)
@@ -55,7 +55,7 @@ function System() {
 
   function changeDriver(event) {
     dispatch(loadSystemDriver(event.target.value))
-    dispatch(loadSystemDriverSetting(system.driver.selectedSetting.name))
+    dispatch(loadSystemDriverSetting(system.driver.selectedSetting.current))
   }
   function changeSetting(event) {
     dispatch(loadSystemDriverSetting(event.target.value))
@@ -93,14 +93,14 @@ function System() {
             <h3>Setting</h3>
             <form onSubmit={changeSetting}>
               {system.driver.settings.map(setting => (
-                <label key={setting.name}>
+                <label key={setting.current}>
                   <input
                     type="radio"
-                    value={setting.name}
-                    checked={setting.name === system.driver.selectedSetting.name}
+                    value={setting.current}
+                    checked={setting.current === system.driver?.selectedSetting?.current}
                     onChange={e => changeSetting(e)}
                   />
-                  {setting.name}
+                  {setting.current}mA
                 </label>
               ))}
             </form>

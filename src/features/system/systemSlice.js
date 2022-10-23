@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { loadDriver } from '../../products/CCdrivers'
+import { loadDriver } from '../../products/drivers/CCdrivers'
 
 const initialState = {
   driver: loadDriver(),
@@ -17,7 +17,7 @@ export const systemSlice = createSlice({
       state.driver = loadDriver(action.payload)
     },
     loadSystemDriverSetting: (state, action) => {
-      const index = state.driver.settings.findIndex(setting => setting.name === action.payload) || 0
+      const index = state.driver.settings.findIndex(setting => setting.current.toString() === action.payload) || 0
       state.driver.settings[index] ?
         state.driver.selectedSetting = state.driver.settings[index] :
         state.driver.selectedSetting = state.driver.settings[0]
@@ -41,7 +41,7 @@ export const systemSlice = createSlice({
     },
     totalPower: state => {
       state.totalPower = state.fixtures.reduce(
-        (acc, curr) => acc + state.driver.selectedSetting.current * curr.voltage, 0
+        (acc, curr) => (acc + state.driver.selectedSetting.current * curr.voltage) / 1000, 0
       )
     },
     setColor: (state, action) => {

@@ -20,7 +20,7 @@ function Fixture({ fixture, index, deleteFixture, driverCurrent }) {
         className={styles.deleteButton}
       >✗</button>
       <div className={styles.text}>{fixture.shortName}</div>
-      {driverCurrent > fixture.maxCurrent && (
+      {driverCurrent / 1000 > fixture.maxCurrent && (
         <span className={styles.highCurrent}>
           <img width="20" height="20" src={highCurrent} alt="Current too high" />
         </span>
