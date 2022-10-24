@@ -1,8 +1,10 @@
+import drawing from './drawing.png'
+
 const driver = {
   name: 'Maxi Jolly',
   shortName: 'Maxi Jolly',
   artNo: 'M-JOL',
-  image: 'maxi-jolly.png',
+  image: drawing,
   settings: [
     {
       current: 350,

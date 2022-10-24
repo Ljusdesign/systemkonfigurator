@@ -61,7 +61,7 @@ function System() {
     dispatch(loadSystemDriverSetting(event.target.value))
   }
 
-  const driverImage = `url(${process.env.PUBLIC_URL}/images/${system.driver.image})`
+  const driverImage = `url(${system.driver.image})`
   const logoImage = `${process.env.PUBLIC_URL}/images/systemkonfigurator.png`
 
   return (
