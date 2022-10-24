@@ -8,6 +8,11 @@ const initialState = {
   totalVoltage: 0,
 }
 
+const compare = (goal, prev, curr) => {
+  const result = Math.abs(curr-goal) < Math.abs(prev-goal)
+  return result
+}
+
 let fixtureId = 0
 export const systemSlice = createSlice({
   name: 'system',
@@ -17,10 +22,9 @@ export const systemSlice = createSlice({
       state.driver = loadDriver(action.payload)
     },
     loadSystemDriverSetting: (state, action) => {
-      const index = state.driver.settings.findIndex(setting => setting.current.toString() === action.payload) || 0
-      state.driver.settings[index] ?
-        state.driver.selectedSetting = state.driver.settings[index] :
-        state.driver.selectedSetting = state.driver.settings[0]
+      state.driver.selectedSetting = state.driver.settings.reduce(
+        (prev, curr) => compare(action.payload, prev.current, curr.current) ? curr : prev
+      )
     },
     addFixture: (state, action) => {
       state.fixtures.push({
