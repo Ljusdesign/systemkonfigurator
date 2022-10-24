@@ -97,7 +97,7 @@ function System() {
                   <input
                     type="radio"
                     value={setting.current}
-                    checked={setting.current === system.driver?.selectedSetting?.current}
+                    checked={setting.current === system.driver.selectedSetting.current}
                     onChange={e => changeSetting(e)}
                   />
                   {setting.current}mA
