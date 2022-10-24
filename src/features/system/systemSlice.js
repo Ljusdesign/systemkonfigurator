@@ -8,10 +8,7 @@ const initialState = {
   totalVoltage: 0,
 }
 
-const compare = (goal, prev, curr) => {
-  const result = Math.abs(curr-goal) < Math.abs(prev-goal)
-  return result
-}
+const compare = (goal, prev, curr) => Math.abs(curr-goal) < Math.abs(prev-goal)
 
 let fixtureId = 0
 export const systemSlice = createSlice({
@@ -22,6 +19,7 @@ export const systemSlice = createSlice({
       state.driver = loadDriver(action.payload)
     },
     loadSystemDriverSetting: (state, action) => {
+      /* find nearest setting */
       state.driver.selectedSetting = state.driver.settings.reduce(
         (prev, curr) => compare(action.payload, prev.current, curr.current) ? curr : prev
       )
