@@ -20,9 +20,10 @@ export const systemSlice = createSlice({
     },
     loadSystemDriverSetting: (state, action) => {
       /* find nearest setting */
-      state.driver.selectedSetting = state.driver.settings.reduce(
+      const selectedSetting = state.driver.settings.reduce(
         (prev, curr) => compare(action.payload, prev.current, curr.current) ? curr : prev
       )
+      state.driver.settingIndex = state.driver.settings.findIndex(s => s === selectedSetting)
     },
     addFixture: (state, action) => {
       state.fixtures.push({
@@ -43,7 +44,7 @@ export const systemSlice = createSlice({
     },
     totalPower: state => {
       state.totalPower = state.fixtures.reduce(
-        (acc, curr) => acc + state.driver.selectedSetting.current * curr.voltage / 1000, 0
+        (acc, curr) => acc + state.driver.settings[state.driver.settingIndex].current * curr.voltage / 1000, 0
       )
     },
     setColor: (state, action) => {
@@ -57,6 +58,7 @@ export const systemSlice = createSlice({
 export const { loadSystemDriver, loadSystemDriverSetting, addFixture, deleteFixture, updateFixtureCurrent, reset, totalVoltage, totalPower, totalCurrent, setColor } = systemSlice.actions
 
 export const selectSystem = state => state.system
+export const selectSelectedSetting = state => state.system.driver.settings[state.system.driver.settingIndex]
 export const selectFixtures = state => state.system.fixtures
 
 export default systemSlice.reducer
