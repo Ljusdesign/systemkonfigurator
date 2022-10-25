@@ -4,6 +4,7 @@ import styles from './System.module.css'
 import {
   systemSlice,
   selectSystem,
+  selectSelectedSetting,
   loadSystemDriver,
   loadSystemDriverSetting,
   addFixture,
@@ -44,6 +45,7 @@ function Meter({
 
 function System() {
   const system = useSelector(selectSystem)
+  const selectedSetting = useSelector(selectSelectedSetting)
   const dispatch = useDispatch(systemSlice)
 
   useEffect(() => {
@@ -55,7 +57,7 @@ function System() {
 
   function changeDriver(event) {
     dispatch(loadSystemDriver(event.target.value))
-    dispatch(loadSystemDriverSetting(system.driver.selectedSetting.current))
+    dispatch(loadSystemDriverSetting(selectedSetting.current))
   }
   function changeSetting(event) {
     dispatch(loadSystemDriverSetting(event.target.value))
@@ -97,7 +99,7 @@ function System() {
                   <input
                     type="radio"
                     value={setting.current}
-                    checked={setting.current === system.driver.selectedSetting.current}
+                    checked={setting.current === selectedSetting.current}
                     onChange={e => changeSetting(e)}
                   />
                   {setting.current}mA
@@ -112,15 +114,15 @@ function System() {
             <tbody>
               <tr>
                 <td>Min voltage</td>
-                <td>{system.driver.selectedSetting.minVoltage}</td>
+                <td>{selectedSetting.minVoltage}</td>
               </tr>
               <tr>
                 <td>Max voltage</td>
-                <td>{system.driver.selectedSetting.maxVoltage}</td>
+                <td>{selectedSetting.maxVoltage}</td>
               </tr>
               <tr>
                 <td>Max power</td>
-                <td>{system.driver.selectedSetting.maxPower}</td>
+                <td>{selectedSetting.maxPower}</td>
               </tr>
             </tbody>
           </table>
@@ -141,15 +143,15 @@ function System() {
           <div className={styles.meters}>
             <Meter
               name='Power'
-              low={system.driver.selectedSetting.minPower}
-              high={system.driver.selectedSetting.maxPower}
+              low={selectedSetting.minPower}
+              high={selectedSetting.maxPower}
               value={rounded(system.totalPower)}
               unit='W'
             />
             <Meter
               name='Voltage'
-              low={system.driver.selectedSetting.minVoltage}
-              high={system.driver.selectedSetting.maxVoltage}
+              low={selectedSetting.minVoltage}
+              high={selectedSetting.maxVoltage}
               value={rounded(system.totalVoltage)}
               unit='V'
             />
@@ -175,7 +177,7 @@ function System() {
       <FixtureList
         fixtures={system.fixtures}
         deleteFixture={id => dispatch(deleteFixture(id))}
-        driverCurrent={system.driver.selectedSetting.current}
+        driverCurrent={selectedSetting.current}
       />
 
       <div>

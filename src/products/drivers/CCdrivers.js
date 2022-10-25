@@ -17,8 +17,7 @@ const drivers = new Map([
 function loadDriver (name = 'Maxi Jolly', setting = 700) {
   return produce(drivers.get(name), driver => {
     driver.index = name
-    const settingIndex = driver.settings.findIndex(s => s.current === setting) || 0
-    driver.selectedSetting = driver.settings[settingIndex]
+    driver.settingIndex = driver.settings.findIndex(s => s.current === setting) || 0
   })
 }
 
