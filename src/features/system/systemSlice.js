@@ -43,7 +43,7 @@ export const systemSlice = createSlice({
     },
     totalPower: state => {
       state.totalPower = state.fixtures.reduce(
-        (acc, curr) => (acc + state.driver.selectedSetting.current * curr.voltage) / 1000, 0
+        (acc, curr) => acc + state.driver.selectedSetting.current * curr.voltage / 1000, 0
       )
     },
     setColor: (state, action) => {
