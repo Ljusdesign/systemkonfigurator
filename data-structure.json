@@ -1,0 +1,66 @@
+{
+  "system": {
+    "allFixtures": [
+      {
+        "name": "Gizmo CC for LED-profile",
+        "shortName": "Gizmo",
+        "voltage": 3,
+        "maxCurrent": 0.7,
+        "image": "gizmo-pt.jpg",
+        "id": 0
+      },
+      {
+        "name": "Arty Zoom CC for LED-profile",
+        "shortName": "Arty Zoom",
+        "voltage": 12,
+        "maxCurrent": 0.7,
+        "image": "arty-zoom-pt.jpg",
+        "id": 1
+      }
+      /* list of all fixtures */
+    ],
+    {
+      "name": "My system",
+      "circuits": [
+        {
+          "name": "Circuit 1",
+          "tracks": [],
+          "driver": {
+            "name": "ELDOLed POWERdrive 1060/A",
+            "shortName": "POWERdrive 1060",
+            "artNo": "ELDO.PAC160/A",
+            "settings": [
+              {
+                "current": 500,
+                "minVoltage": 6,
+                "maxVoltage": 60,
+                "maxPower": 30
+              },
+              {
+                "current": 700,
+                "minVoltage": 6,
+                "maxVoltage": 58,
+                "maxPower": 41
+              },
+              {
+                "current": 1050,
+                "minVoltage": 6,
+                "maxVoltage": 48,
+                "maxPower": 50
+              }
+            ],
+            "index": "LD50 dimmer",
+            "LEDOutputSettings": [
+              2,
+              2,
+              0,
+              -1
+            ]
+          },
+          "totalPower": 0,
+          "totalVoltage": 0
+        }
+      ]
+    }
+  }
+}
