@@ -155,11 +155,11 @@ function System() {
         <ReloadSymbol />
       </button>
       {
-        [...CCfixtures.keys()].map((name, value) => (
+        CCfixtures.map((f, index) => (
           <button
-            key={value}
-            onClick={() => dispatch(addFixture(CCfixtures.get(name)))}
-          >{name}</button>
+            key={index}
+            onClick={() => dispatch(addFixture(CCfixtures[index]))}
+          >{f.shortName}</button>
         ))
       }
 
