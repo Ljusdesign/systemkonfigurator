@@ -1,5 +1,5 @@
 const driver = {
-  name: 'Lightronic CC LED-driver 30w med dimmer',
+  name: 'Lightronic CC LED-driver 30W med dimmer',
   shortName: 'LD30',
   artNo: 'LD30-PV2-D',
   outputs: [2],

@@ -36,9 +36,16 @@
 
 .settingChannels {
   display: flex;
+  gap: 2em;
+}
+.channel {
+  padding-right: 1em;
+  border-right: 1px dotted black;
 }
 
 .features {
+  display: flex;
+  flex-direction: row;
 }
 
 .reload>span {
@@ -50,13 +57,15 @@
 }
 
 .meters {
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
   gap: 2em;
+  margin-top: 2em;
 }
 
 .meter {
-  margin: 1em;
   border: 3px dashed transparent;
+  height: 5em;
 }
 
 table {

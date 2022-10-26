@@ -87,15 +87,39 @@ function System() {
               }
               )}
             </form>
-
+          </div>
+          <h3>{system.driver.name}</h3>
+          <div className={styles.features}>
+            <table>
+              <tbody>
+                {system.driver.globalSettings?.maxPower ? (
+                  <tr>
+                    <td>Max power</td>
+                    <td>{system.driver.globalSettings.maxPower} W</td>
+                  </tr>
+                ) : null}
+              </tbody>
+            </table>
+            {driverImage ?
+              <div
+                style={{
+                  display: 'inline-block',
+                  backgroundImage: driverImage,
+                  backgroundSize: 'cover',
+                  height: '10em',
+                  width: '20em',
+                }}
+              ></div>
+              : null}
           </div>
 
           <div className={styles.setting}>
             <h3>Settings</h3>
             <div className={styles.settingChannels}>
+              {console.log(JSON.stringify(totalPower))}
               {system.driver.outputs.map((o, index) => (
-                <div key={index}>
-                <p>Ch. {index+1}</p>
+                <div className={styles.channel} key={index}>
+                  <p>Ch. {index+1}</p>
                   <form onSubmit={changeSetting}>
                     {system.driver.settings.map(setting => (
                       <label key={setting.current}>
@@ -105,63 +129,34 @@ function System() {
                           checked={setting.current === selectedSettings[index].current}
                           onChange={e => changeSetting(index, setting.current)}
                         />
-                        {setting.current}mA
+                        {setting.current} mA
                       </label>
                     ))}
                   </form>
+                  <div className={styles.meters}>
+                    <Meter
+                      name='Power'
+                      low={selectedSettings[index].minPower}
+                      high={selectedSettings[index].maxPower}
+                      value={rounded(totalPower[index])}
+                      unit='W'
+                    />
+                    <Meter
+                      name='Voltage'
+                      low={selectedSettings[index].minVoltage}
+                      high={selectedSettings[index].maxVoltage}
+                      value={rounded(totalVoltage[index])}
+                      unit='V'
+                    />
+                  </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <div className={styles.features}>
-          <h3>{system.driver.name}</h3>
-          <table>
-            <tbody>
-              <tr>
-                <td>Min voltage</td>
-                <td>{selectedSettings[0].minVoltage}</td>
-              </tr>
-              <tr>
-                <td>Max voltage</td>
-                <td>{selectedSettings[0].maxVoltage}</td>
-              </tr>
-              <tr>
-                <td>Max power</td>
-                <td>{selectedSettings[0].maxPower}</td>
-              </tr>
-            </tbody>
-          </table>
-          {driverImage ?
-            <div
-              style={{
-                backgroundImage: driverImage,
-                backgroundSize: 'contain',
-                width: '10em',
-                height: '10em',
-              }}
-            ></div>
-            : null}
-        </div>
       </div>
       <div>
         <div>
-          <div className={styles.meters}>
-            <Meter
-              name='Power'
-              low={selectedSettings[0].minPower}
-              high={selectedSettings[0].maxPower}
-              value={rounded(totalPower)}
-              unit='W'
-            />
-            <Meter
-              name='Voltage'
-              low={selectedSettings[0].minVoltage}
-              high={selectedSettings[0].maxVoltage}
-              value={rounded(totalVoltage)}
-              unit='V'
-            />
-          </div>
         </div>
 
       </div >

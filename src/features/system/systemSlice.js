@@ -51,12 +51,20 @@ export const selectSelectedSettings = state => {
   return result
 }
 export const selectFixtures = state => state.system.fixtures
-export const selectTotalPower = state => state.system.fixtures.reduce(
-  (acc, curr) => acc + state.system.driver.settings[state.system.driver.outputs[0]].current * curr.voltage / 1000,
-  0
-)
-export const selectTotalVoltage = state => state.system.fixtures.reduce(
-  (acc, curr) => acc + curr.voltage, 0
-)
+export const selectTotalPower = state => state.system.driver.outputs.map((o, index) => {
+  if (index === 0) {
+    return state.system.fixtures.reduce(
+      (acc, curr) => acc + state.system.driver.settings[index].current * curr.voltage / 1000,
+      0
+    )
+  } else {
+    return 0
+  }
+})
+export const selectTotalVoltage = state => state.system.driver.outputs.map((o, index) => {
+  return state.system.fixtures.reduce(
+    (acc, curr) => index === 0 ? acc + curr.voltage : 0, 0
+  )
+})
 
 export default systemSlice.reducer
