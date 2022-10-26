@@ -52,7 +52,7 @@ export const selectSelectedSettings = state => {
 }
 export const selectFixtures = state => state.system.fixtures
 export const selectTotalPower = state => state.system.fixtures.reduce(
-  (acc, curr) => acc + state.system.driver.settings[state.system.driver.outputs].current * curr.voltage / 1000,
+  (acc, curr) => acc + state.system.driver.settings[state.system.driver.outputs[0]].current * curr.voltage / 1000,
   0
 )
 export const selectTotalVoltage = state => state.system.fixtures.reduce(
