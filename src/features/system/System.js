@@ -10,49 +10,20 @@ import {
   addFixture,
   deleteFixture,
   reset,
-  selectTotalPower,
-  selectTotalVoltage,
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
 import CCfixtures from '../../products/fixtures/CCfixtures'
 import CCdrivers from '../../products/drivers/CCdrivers'
 
 import Drivers from './Drivers'
+import Settings from './Settings'
 
 const ReloadSymbol = () => (<span>&#x21bb;</span>)
-const LightningSymbol = () => (<span>&#128498;</span>)
-
-function Meter({
-  name,
-  value,
-  low = 1,
-  high,
-  unit,
-}) {
-  return (
-    <div className={styles.meter}>
-      <label htmlFor="meter">{name}<br /></label>
-      {value < high ?
-        <meter low={low} max={high} value={value}>{value}</meter> :
-        <meter low={low} high={high} optimum={0} max={high * 1.01} value={value}>{value}</meter>
-      }
-      <br />
-      {low ?
-        `${value} (${low}-${high} ${unit})` :
-        `${value} (${high} ${unit})`
-      }
-    </div>
-  )
-}
 
 function System() {
   const system = useSelector(selectSystem)
   const selectedSettings = useSelector(selectSelectedSettings)
-  const totalPower = useSelector(selectTotalPower)
-  const totalVoltage = useSelector(selectTotalVoltage)
   const dispatch = useDispatch(systemSlice)
-
-  const rounded = number => Math.round(number * 100) / 100
 
   function changeDriver(driver) {
     dispatch(loadSystemDriver(driver))
@@ -104,42 +75,13 @@ function System() {
 
           <div className={styles.setting}>
             <h3>Settings</h3>
-            <div className={styles.settingChannels}>
-              {system.driver.outputs.map((o, index) => (
-                <div className={styles.channel} key={index}>
-                  <p>Ch. {index + 1}</p>
-                  <form onSubmit={changeSetting}>
-                    {system.driver.settings.map(setting => (
-                      <label key={setting.current}>
-                        <input
-                          type="radio"
-                          value={setting.current}
-                          checked={setting.current === selectedSettings[index].current}
-                          onChange={e => changeSetting(index, setting.current)}
-                        />
-                        {setting.current} mA
-                      </label>
-                    ))}
-                  </form>
-                  <div className={styles.meters}>
-                    <Meter
-                      name='Power'
-                      low={selectedSettings[index].minPower}
-                      high={selectedSettings[index].maxPower}
-                      value={rounded(totalPower[index])}
-                      unit='W'
-                    />
-                    <Meter
-                      name='Voltage'
-                      low={selectedSettings[index].minVoltage}
-                      high={selectedSettings[index].maxVoltage}
-                      value={rounded(totalVoltage[index])}
-                      unit='V'
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
+            <Settings
+              changeSetting={changeSetting}
+              selectedSettings={selectedSettings}
+              outputs={system.driver.outputs}
+              settings={system.driver.settings}
+            >
+            </Settings>
           </div>
         </div>
       </div>

@@ -1,0 +1,35 @@
+.outputList {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 10em;
+  padding-inline: 2em;
+  padding-block-end: 2em;
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: proximity;
+  padding-inline-start: 1em;
+  gap: 0.6em;
+}
+.setting {
+  width: 10em;
+
+  scroll-snap-align: start;
+  display: grid;
+  grid-auto-flow: row;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+  scroll-snap-type: proximity;
+  padding-inline-start: 1em;
+  gap: 0.4em;
+  margin: 0;
+  padding: 0.5em;
+  user-select: none;
+  border-right: 1px dotted black;
+}
+setting:hover {
+  cursor: pointer;
+}
+.selected {
+  border: 1px solid black;
+}
