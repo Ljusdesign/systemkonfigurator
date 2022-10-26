@@ -14,6 +14,7 @@
 
 .driver {
   display: flex;
+  flex-direction: column;
   gap: 2em;
 }
 
@@ -31,6 +32,10 @@
 
 .setting *>label {
   display: block;
+}
+
+.settingChannels {
+  display: flex;
 }
 
 .features {

@@ -5,6 +5,7 @@ const driver = {
   shortName: 'Maxi Jolly',
   artNo: 'M-JOL',
   image: drawing,
+  outputs: [4],
   settings: [
     {
       current: 350,

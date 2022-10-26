@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styles from './System.module.css'
 import {
   systemSlice,
   selectSystem,
-  selectSelectedSetting,
+  selectSelectedSettings,
   loadSystemDriver,
   loadSystemDriverSetting,
   addFixture,
@@ -45,19 +45,18 @@ function Meter({
 
 function System() {
   const system = useSelector(selectSystem)
-  const selectedSetting = useSelector(selectSelectedSetting)
+  const selectedSettings = useSelector(selectSelectedSettings)
   const totalPower = useSelector(selectTotalPower)
   const totalVoltage = useSelector(selectTotalVoltage)
   const dispatch = useDispatch(systemSlice)
 
   const rounded = number => Math.round(number * 100) / 100
 
-  function changeDriver(event) {
-    dispatch(loadSystemDriver(event.target.value))
-    dispatch(loadSystemDriverSetting(selectedSetting.current))
+  function changeDriver(driver) {
+    dispatch(loadSystemDriver(driver))
   }
-  function changeSetting(event) {
-    dispatch(loadSystemDriverSetting(event.target.value))
+  function changeSetting(index, current) {
+    dispatch(loadSystemDriverSetting({index, current}))
   }
 
   const driverImage = `url(${system.driver.image})`
@@ -73,36 +72,46 @@ function System() {
           <div className={styles.driverType}>
             <h3>Driver</h3>
             <form>
-              {[...CCdrivers.keys()].map((name, value) => (
-                <label key={name}>
-                  <input
-                    type="radio"
-                    key={value}
-                    value={name}
-                    checked={system.driver.index === name}
-                    onChange={e => changeDriver(e)}
-                  /> {name}
-                </label>
-              ))}
+              {CCdrivers.map((driver, index) => {
+                return (
+                  <label key={driver.name}>
+                    <input
+                      type="radio"
+                      key={index}
+                      value={driver.name}
+                      checked={driver.shortName === system.driver.shortName}
+                      onChange={e => changeDriver(driver)}
+                    /> {driver.name}
+                  </label>
+                )
+              }
+              )}
             </form>
 
           </div>
 
           <div className={styles.setting}>
-            <h3>Setting</h3>
-            <form onSubmit={changeSetting}>
-              {system.driver.settings.map(setting => (
-                <label key={setting.current}>
-                  <input
-                    type="radio"
-                    value={setting.current}
-                    checked={setting.current === selectedSetting.current}
-                    onChange={e => changeSetting(e)}
-                  />
-                  {setting.current}mA
-                </label>
+            <h3>Settings</h3>
+            <div className={styles.settingChannels}>
+              {system.driver.outputs.map((o, index) => (
+                <div key={index}>
+                <p>Ch. {index+1}</p>
+                  <form onSubmit={changeSetting}>
+                    {system.driver.settings.map(setting => (
+                      <label key={setting.current}>
+                        <input
+                          type="radio"
+                          value={setting.current}
+                          checked={setting.current === selectedSettings[index].current}
+                          onChange={e => changeSetting(index, setting.current)}
+                        />
+                        {setting.current}mA
+                      </label>
+                    ))}
+                  </form>
+                </div>
               ))}
-            </form>
+            </div>
           </div>
         </div>
         <div className={styles.features}>
@@ -111,28 +120,28 @@ function System() {
             <tbody>
               <tr>
                 <td>Min voltage</td>
-                <td>{selectedSetting.minVoltage}</td>
+                <td>{selectedSettings[0].minVoltage}</td>
               </tr>
               <tr>
                 <td>Max voltage</td>
-                <td>{selectedSetting.maxVoltage}</td>
+                <td>{selectedSettings[0].maxVoltage}</td>
               </tr>
               <tr>
                 <td>Max power</td>
-                <td>{selectedSetting.maxPower}</td>
+                <td>{selectedSettings[0].maxPower}</td>
               </tr>
             </tbody>
           </table>
           {driverImage ?
-          <div
-            style={{
-              backgroundImage: driverImage,
-              backgroundSize: 'contain',
-              width: '10em',
-              height: '10em',
-            }}
-          ></div>
-          : null}
+            <div
+              style={{
+                backgroundImage: driverImage,
+                backgroundSize: 'contain',
+                width: '10em',
+                height: '10em',
+              }}
+            ></div>
+            : null}
         </div>
       </div>
       <div>
@@ -140,15 +149,15 @@ function System() {
           <div className={styles.meters}>
             <Meter
               name='Power'
-              low={selectedSetting.minPower}
-              high={selectedSetting.maxPower}
+              low={selectedSettings[0].minPower}
+              high={selectedSettings[0].maxPower}
               value={rounded(totalPower)}
               unit='W'
             />
             <Meter
               name='Voltage'
-              low={selectedSetting.minVoltage}
-              high={selectedSetting.maxVoltage}
+              low={selectedSettings[0].minVoltage}
+              high={selectedSettings[0].maxVoltage}
               value={rounded(totalVoltage)}
               unit='V'
             />
@@ -174,7 +183,7 @@ function System() {
       <FixtureList
         fixtures={system.fixtures}
         deleteFixture={id => dispatch(deleteFixture(id))}
-        driverCurrent={selectedSetting.current}
+        driverCurrent={selectedSettings[0].current}
       />
 
       <div>

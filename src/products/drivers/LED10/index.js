@@ -2,6 +2,7 @@ const driver = {
   name: 'Plejd LED-driver 10W',
   shortName: 'LED-10',
   artNo: 'LED-10',
+  outputs: [2],
   settings: [
     {
       current: 150,

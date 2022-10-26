@@ -5,6 +5,7 @@ const driver = {
   shortName: 'LD50',
   artNo: 'LD50C-PVH-D',
   image: drawing,
+  outputs: [1, 0],
   settings: [
     {
       current: 500,
