@@ -70,7 +70,7 @@ function System() {
         <img src={logoImage} alt="systemkonfigurator logo" width="200" />
       </div>
       <h3>Driver</h3>
-      <Drivers 
+      <Drivers
         drivers={CCdrivers}
         selectedDriver={system.driver}
         changeDriver={changeDriver}
