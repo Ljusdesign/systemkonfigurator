@@ -41,6 +41,7 @@
 .channel {
   padding-right: 1em;
   border-right: 1px dotted black;
+  width: 8em;
 }
 
 .features {

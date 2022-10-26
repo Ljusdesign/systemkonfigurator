@@ -5,11 +5,13 @@ import styles from './Fixture.module.css'
 function Fixture({ fixture, index, deleteFixture, driverCurrent }) {
   const background = `url(${process.env.PUBLIC_URL}/images/${fixture.image})`
   const highCurrent = `${process.env.PUBLIC_URL}/images/electricity-caution.svg`
+  const currentTooHigh = driverCurrent / 1000 > fixture.maxCurrent
 
   return (
     <div
       className={styles.fixture}
       style={{
+        border: currentTooHigh ? '3px dotted #b3ae22' : '3px solid transparent',
         backgroundImage: background,
         backgroundSize: 'contain',
       }}
@@ -20,7 +22,7 @@ function Fixture({ fixture, index, deleteFixture, driverCurrent }) {
         className={styles.deleteButton}
       >✗</button>
       <div className={styles.text}>{fixture.shortName}</div>
-      {driverCurrent / 1000 > fixture.maxCurrent && (
+      {currentTooHigh && (
         <span className={styles.highCurrent}>
           <img width="20" height="20" src={highCurrent} alt="Current too high" />
         </span>
