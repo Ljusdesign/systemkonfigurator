@@ -1,7 +1,7 @@
 .fixture {
   position: relative;
-  width: 75px;
-  height: 75px;
+  width: 85px;
+  height: 85px;
   padding: 0.5em 1em;
   border-radius: 2px;
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
@@ -36,7 +36,9 @@
   border-radius: 50%;
   width: 25px;
   height: 25px;
+  z-index: 100;
 }
 .deleteButton:hover {
   background: #ccc;
+  cursor: pointer;
 }
