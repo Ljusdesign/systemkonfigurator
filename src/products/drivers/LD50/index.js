@@ -16,15 +16,39 @@ const driver = {
       maxPower: 30,
     },
     {
+      current: 650,
+      minVoltage: 6,
+      maxVoltage: 60,
+      maxPower: 39,
+    },
+    {
       current: 700,
       minVoltage: 6,
       maxVoltage: 58,
       maxPower: 41,
     },
     {
+      current: 800,
+      minVoltage: 6,
+      maxVoltage: 60,
+      maxPower: 48,
+    },
+    {
+      current: 900,
+      minVoltage: 6,
+      maxVoltage: 56,
+      maxPower: 50,
+    },
+    {
       current: 1050,
       minVoltage: 6,
       maxVoltage: 48,
+      maxPower: 50,
+    },
+    {
+      current: 1200,
+      minVoltage: 6,
+      maxVoltage: 42,
       maxPower: 50,
     },
   ]
