@@ -6,7 +6,7 @@ const initialState = {
   fixtures: [],
 }
 
-const compare = (goal, prev, curr) => Math.abs(curr-goal) < Math.abs(prev-goal)
+const nearest = (goal, prev, curr) => Math.abs(curr-goal) < Math.abs(prev-goal)
 
 let fixtureId = 0
 export const systemSlice = createSlice({
@@ -19,7 +19,7 @@ export const systemSlice = createSlice({
     loadSystemDriverSetting: (state, action) => {
       /* find nearest setting */
       const selectedSetting = state.driver.settings.reduce(
-        (prev, curr) => compare(action.payload, prev.current, curr.current) ? curr : prev
+        (prev, curr) => nearest(action.payload, prev.current, curr.current) ? curr : prev
       )
       state.driver.settingIndex = state.driver.settings.findIndex(s => s === selectedSetting)
     },
