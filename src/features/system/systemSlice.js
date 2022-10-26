@@ -4,8 +4,6 @@ import { loadDriver } from '../../products/drivers/CCdrivers'
 const initialState = {
   driver: loadDriver(),
   fixtures: [],
-  totalPower: 0,
-  totalVoltage: 0,
 }
 
 const compare = (goal, prev, curr) => Math.abs(curr-goal) < Math.abs(prev-goal)
@@ -37,16 +35,6 @@ export const systemSlice = createSlice({
         1
       )
     },
-    totalVoltage: state => {
-      state.totalVoltage = state.fixtures.reduce(
-        (acc, curr) => acc + curr.voltage, 0
-      )
-    },
-    totalPower: state => {
-      state.totalPower = state.fixtures.reduce(
-        (acc, curr) => acc + state.driver.settings[state.driver.settingIndex].current * curr.voltage / 1000, 0
-      )
-    },
     setColor: (state, action) => {
       const { id, color } = action
       state.fixtures[id].color = color
@@ -58,7 +46,15 @@ export const systemSlice = createSlice({
 export const { loadSystemDriver, loadSystemDriverSetting, addFixture, deleteFixture, updateFixtureCurrent, reset, totalVoltage, totalPower, totalCurrent, setColor } = systemSlice.actions
 
 export const selectSystem = state => state.system
+export const selectSettingIndex = state => state.system.driver.settingIndex
 export const selectSelectedSetting = state => state.system.driver.settings[state.system.driver.settingIndex]
 export const selectFixtures = state => state.system.fixtures
+export const selectTotalPower = state => state.system.fixtures.reduce(
+  (acc, curr) => acc + state.system.driver.settings[state.system.driver.settingIndex].current * curr.voltage / 1000,
+  0
+)
+export const selectTotalVoltage = state => state.system.fixtures.reduce(
+  (acc, curr) => acc + curr.voltage, 0
+)
 
 export default systemSlice.reducer

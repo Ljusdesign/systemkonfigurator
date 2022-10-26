@@ -10,8 +10,8 @@ import {
   addFixture,
   deleteFixture,
   reset,
-  totalVoltage,
-  totalPower,
+  selectTotalPower,
+  selectTotalVoltage,
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
 import CCfixtures from '../../products/fixtures/CCfixtures'
@@ -46,12 +46,9 @@ function Meter({
 function System() {
   const system = useSelector(selectSystem)
   const selectedSetting = useSelector(selectSelectedSetting)
+  const totalPower = useSelector(selectTotalPower)
+  const totalVoltage = useSelector(selectTotalVoltage)
   const dispatch = useDispatch(systemSlice)
-
-  useEffect(() => {
-    dispatch(totalVoltage())
-    dispatch(totalPower())
-  }, [system.fixtures, dispatch])
 
   const rounded = number => Math.round(number * 100) / 100
 
@@ -145,14 +142,14 @@ function System() {
               name='Power'
               low={selectedSetting.minPower}
               high={selectedSetting.maxPower}
-              value={rounded(system.totalPower)}
+              value={rounded(totalPower)}
               unit='W'
             />
             <Meter
               name='Voltage'
               low={selectedSetting.minVoltage}
               high={selectedSetting.maxVoltage}
-              value={rounded(system.totalVoltage)}
+              value={rounded(totalVoltage)}
               unit='V'
             />
           </div>
