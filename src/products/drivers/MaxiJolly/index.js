@@ -1,10 +1,12 @@
+import cover from './127413-foto.jpg'
 import drawing from './drawing.png'
 
 const driver = {
   name: 'Maxi Jolly',
   shortName: 'Maxi Jolly',
   artNo: 'M-JOL',
-  image: drawing,
+  cover,
+  drawing,
   outputs: [4],
   settings: [
     {

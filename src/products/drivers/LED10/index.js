@@ -1,7 +1,10 @@
+import cover from './LED_10_top_1200x1200_72DPI_RGB.png'
+
 const driver = {
   name: 'Plejd LED-driver 10W',
   shortName: 'LED-10',
   artNo: 'LED-10',
+  cover,
   outputs: [2],
   settings: [
     {

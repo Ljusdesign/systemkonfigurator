@@ -1,0 +1,48 @@
+.driverList {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: 10em;
+  padding-inline: 2em;
+  padding-block-end: 2em;
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: proximity;
+  padding-inline-start: 1em;
+  gap: 0.6em;
+}
+figure {
+  border: 1px solid transparent;
+  border-radius: 4px;
+  width: 10em;
+  height: 10em;
+
+  scroll-snap-align: start;
+  display: grid;
+  grid-auto-rows: auto;
+  gap: 0.4em;
+  margin: 0;
+  padding: 0.5em;
+  user-select: none;
+  text-align: center;
+}
+figure:hover {
+  cursor: pointer;
+}
+.selected {
+  border: 1px solid black;
+}
+picture {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  align-self: center;
+}
+picture > img {
+  height: 6em;
+  width: 8em;
+  object-fit: cover;
+}
+figcaption {
+  height: 1.5em;
+  font-weight: 600;
+  overflow-x: hidden;
+}

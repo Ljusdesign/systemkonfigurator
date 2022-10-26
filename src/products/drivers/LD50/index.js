@@ -1,11 +1,13 @@
 import drawing from './drawing.png'
+import cover from './Lightronic_Product_Driver_LD50C-PV2_Bottom_Front.jpg'
 
 const driver = {
-  name: 'Lightronic CC LED-driver 50W med dimmer',
+  name: 'Lightronic 50W',
   shortName: 'LD50',
   artNo: 'LD50C-PVH-D',
-  image: drawing,
-  outputs: [1, 0],
+  cover,
+  drawing,
+  outputs: [2],
   settings: [
     {
       current: 500,

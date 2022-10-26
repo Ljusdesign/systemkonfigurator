@@ -17,6 +17,8 @@ import FixtureList from '../fixture/FixtureList'
 import CCfixtures from '../../products/fixtures/CCfixtures'
 import CCdrivers from '../../products/drivers/CCdrivers'
 
+import Drivers from './Drivers'
+
 const ReloadSymbol = () => (<span>&#x21bb;</span>)
 const LightningSymbol = () => (<span>&#128498;</span>)
 
@@ -67,27 +69,14 @@ function System() {
       <div className={styles.top}>
         <img src={logoImage} alt="systemkonfigurator logo" width="200" />
       </div>
+      <h3>Driver</h3>
+      <Drivers 
+        drivers={CCdrivers}
+        selectedDriver={system.driver}
+        changeDriver={changeDriver}
+      />
       <div className={styles.system}>
         <div className={styles.driver}>
-          <div className={styles.driverType}>
-            <h3>Driver</h3>
-            <form>
-              {CCdrivers.map((driver, index) => {
-                return (
-                  <label key={driver.name}>
-                    <input
-                      type="radio"
-                      key={index}
-                      value={driver.name}
-                      checked={driver.shortName === system.driver.shortName}
-                      onChange={e => changeDriver(driver)}
-                    /> {driver.name}
-                  </label>
-                )
-              }
-              )}
-            </form>
-          </div>
           <h3>{system.driver.name}</h3>
           <div className={styles.features}>
             <table>

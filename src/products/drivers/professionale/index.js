@@ -1,8 +1,13 @@
+import drawing from './drawing.png'
+import cover from './127631_foto.jpg'
+
 const driver = {
   name: 'TCI Professionale Casambi',
   shortName: 'TCI Prof',
   artNo: 'PRO-CASAMBI',
-  output: [8],
+  drawing,
+  cover,
+  outputs: [8],
   settings: [
     {
       current: 300,

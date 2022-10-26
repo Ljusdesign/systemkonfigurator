@@ -1,7 +1,12 @@
+import cover from './Lightronic_Product_Drivers_LD30C-PV2_Front.jpg'
+import drawing from './ld30-drawing.png'
+
 const driver = {
-  name: 'Lightronic CC LED-driver 30W med dimmer',
+  name: 'Lightronic 30W',
   shortName: 'LD30',
   artNo: 'LD30-PV2-D',
+  cover,
+  drawing,
   outputs: [2],
   settings: [
     {
