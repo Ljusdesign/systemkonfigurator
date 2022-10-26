@@ -25,4 +25,3 @@ export default new Map([
     height: 10,
   }],
 ])
-

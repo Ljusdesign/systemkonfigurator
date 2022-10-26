@@ -58,10 +58,10 @@ function System() {
     dispatch(loadSystemDriver(driver))
   }
   function changeSetting(index, current) {
-    dispatch(loadSystemDriverSetting({index, current}))
+    dispatch(loadSystemDriverSetting({ index, current }))
   }
 
-  const driverImage = `url(${system.driver.image})`
+  const driverDrawingImage = `url(${system.driver.drawing})`
   const logoImage = `${process.env.PUBLIC_URL}/images/systemkonfigurator.png`
 
   return (
@@ -89,11 +89,11 @@ function System() {
                 ) : null}
               </tbody>
             </table>
-            {driverImage ?
+            {driverDrawingImage ?
               <div
                 style={{
                   display: 'inline-block',
-                  backgroundImage: driverImage,
+                  backgroundImage: driverDrawingImage,
                   backgroundSize: 'cover',
                   height: '10em',
                   width: '20em',
@@ -105,10 +105,9 @@ function System() {
           <div className={styles.setting}>
             <h3>Settings</h3>
             <div className={styles.settingChannels}>
-              {console.log(JSON.stringify(totalPower))}
               {system.driver.outputs.map((o, index) => (
                 <div className={styles.channel} key={index}>
-                  <p>Ch. {index+1}</p>
+                  <p>Ch. {index + 1}</p>
                   <form onSubmit={changeSetting}>
                     {system.driver.settings.map(setting => (
                       <label key={setting.current}>
