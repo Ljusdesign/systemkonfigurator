@@ -1,29 +1,37 @@
 import React from 'react'
+import Select from 'react-select'
 import Meters from './Meters'
 import styles from './Settings.module.css'
 
-function Settings({selectedSettings, outputs, settings, changeSetting}) {
+const makeLabel = current => current + ' mA'
+
+const getOptions = (index, settings, changeSetting) => (
+  settings.map(op => ({
+    value: op.current,
+    isOptionSelected: op.current === op.current,
+    label: makeLabel(op.current),
+    onChange: () => changeSetting(index, op.current),
+  }))
+)
+
+function Settings({ selectedSettings, outputs, settings, changeSetting }) {
   return (
     <div className={styles.outputList}>
       {outputs.map((output, index) => (
-          <div>
-            <div key={index} className={styles.setting}>
-              <p>Ch. {index + 1}</p>
-              {settings.map(setting => (
-                <label key={setting.current}>
-                  <input
-                    type="radio"
-                    value={setting.current}
-                    checked={setting.current === selectedSettings[index].current}
-                    onChange={e => changeSetting(index, setting.current)}
-                  />
-                  {setting.current} mA
-                </label>
-              ))}
-            </div>
-            <Meters index={index} />
-          </div>
-      ))}
+        <div key={index}>
+          <p>Ch. {index + 1}</p>
+          <Select
+            options={getOptions(index, settings, changeSetting)}
+            defaultValue={{
+              value: selectedSettings[index].current,
+              label: makeLabel(selectedSettings[index].current),
+            }}
+            onChange={(event) => changeSetting(index, event)}
+          />
+          <Meters index={index} />
+        </div>
+      )
+      )}
     </div>
   )
 }

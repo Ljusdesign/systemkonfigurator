@@ -25,8 +25,8 @@ function System() {
   function changeDriver(driver) {
     dispatch(loadSystemDriver(driver))
   }
-  function changeSetting(index, current) {
-    dispatch(loadSystemDriverSetting({ index, current }))
+  function changeSetting(index, e) {
+    dispatch(loadSystemDriverSetting({ index, current: e.value }))
   }
 
   const driverDrawingImage = `url(${system.driver.drawing})`
