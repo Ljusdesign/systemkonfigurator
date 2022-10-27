@@ -7,18 +7,15 @@ import {
   selectSelectedSettings,
   loadSystemDriver,
   loadSystemDriverSetting,
-  addFixture,
   deleteFixture,
-  reset,
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
+import FixturePicker from '../fixture/FixturePicker'
 import CCfixtures from '../../products/fixtures/CCfixtures'
 import CCdrivers from '../../products/drivers/CCdrivers'
 
 import Drivers from './Drivers'
 import Settings from './Settings'
-
-const ReloadSymbol = () => (<span>&#x21bb;</span>)
 
 function System() {
   const system = useSelector(selectSystem)
@@ -86,25 +83,8 @@ function System() {
           </div>
         </div>
       </div>
-      <div>
-        <div>
-        </div>
 
-      </div >
-
-      <button
-        className={styles.reload}
-        onClick={() => dispatch(reset())}>
-        <ReloadSymbol />
-      </button>
-      {
-        CCfixtures.map((f, index) => (
-          <button
-            key={index}
-            onClick={() => dispatch(addFixture(CCfixtures[index]))}
-          >{f.shortName}</button>
-        ))
-      }
+      <FixturePicker fixtures={CCfixtures} />
 
       <FixtureList
         fixtures={system.fixtures}

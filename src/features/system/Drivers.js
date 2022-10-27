@@ -3,7 +3,7 @@ import styles from './Drivers.module.css'
 
 function Drivers({drivers, selectedDriver, changeDriver}) {
   return (
-    <div className={styles.driverList}>
+    <div className={styles.list}>
       {drivers.map(d => (
         <figure
           key={d.artNo}

@@ -1,18 +1,15 @@
 .outputList {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: 10em;
-  padding-inline: 2em;
   padding-block-end: 2em;
 
-  overflow-x: auto;
   overscroll-behavior-x: contain;
   scroll-snap-type: proximity;
-  padding-inline-start: 1em;
+  padding-inline-start: 0em;
   gap: 0.6em;
 }
 .setting {
-  width: 10em;
+  width: 8em;
 
   scroll-snap-align: start;
   display: grid;
@@ -25,9 +22,8 @@
   margin: 0;
   padding: 0.5em;
   user-select: none;
-  border-right: 1px dotted black;
 }
-setting:hover {
+.setting:hover {
   cursor: pointer;
 }
 .selected {

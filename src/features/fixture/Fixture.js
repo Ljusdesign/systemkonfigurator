@@ -3,9 +3,9 @@ import styles from './Fixture.module.css'
 
 
 function Fixture({ fixture, index, deleteFixture, driverCurrent }) {
-  const background = `url(${process.env.PUBLIC_URL}/images/${fixture.image})`
+  const background = `url(${fixture.cover})`
   const highCurrent = `${process.env.PUBLIC_URL}/images/electricity-caution.svg`
-  const currentTooHigh = driverCurrent / 1000 > fixture.maxCurrent
+  const currentTooHigh = driverCurrent > fixture.maxCurrent
 
   return (
     <div

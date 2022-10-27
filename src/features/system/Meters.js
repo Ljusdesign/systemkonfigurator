@@ -35,7 +35,6 @@ function Meters({ index }) {
   const totalPower = useSelector(selectTotalPower)
   const totalVoltage = useSelector(selectTotalVoltage)
   const rounded = number => Math.round(number * 100) / 100
-  console.log(index)
 
   return (
     <div className={styles.meters}>
