@@ -17,8 +17,9 @@ export const systemSlice = createSlice({
       state.driver = loadDriver(action.payload)
     },
     loadSystemDriverSetting: (state, action) => {
+      const {index, current} = action.payload
       /* find nearest setting */
-      state.driver.outputs[action.payload.index] = state.driver.settings.findIndex(s => s.current === action.payload.current)
+      state.driver.outputs[index] = state.driver.settings.findIndex(s => s.current === current)
     },
     addFixture: (state, action) => {
       state.fixtures.push({
