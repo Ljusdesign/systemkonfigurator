@@ -8,8 +8,7 @@
 
   overflow-x: auto;
   overscroll-behavior-x: contain;
-  scroll-snap-type: proximity;
-  padding-inline-start: 1em;
+  scroll-snap-type: x proximity;
   gap: 0.6em;
 }
 figure {
@@ -22,14 +21,25 @@ figure {
   display: grid;
   grid-auto-rows: auto;
   gap: 0.4em;
+  position: relative;
   margin: 0;
   padding: 0.5em;
   user-select: none;
   text-align: center;
 }
+figure:last-child::after {
+  content: "";
+  position: absolute;
+  width: 2rem;
+  height: 100%;
+  right: -2rem;
+  inline-size: 2rem;
+  block-size: 100%;
+  inset-inline-end: -2rem;
+}
 figure:hover {
   cursor: pointer;
-  border: 1px solid rgba(3, 102, 214, 0.2)
+  border: 1px solid rgba(3, 102, 214, 0.2);
 }
 .selected {
   box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
@@ -54,5 +64,7 @@ picture > img:hover {
 figcaption {
   height: 1.5em;
   font-weight: 600;
-  overflow-x: hidden;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
