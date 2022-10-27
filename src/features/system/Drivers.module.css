@@ -2,6 +2,7 @@
   display: grid;
   grid-auto-flow: column;
   grid-auto-columns: 10em;
+  padding-top: 1em;
   padding-inline: 2em;
   padding-block-end: 2em;
 
@@ -28,9 +29,14 @@ figure {
 }
 figure:hover {
   cursor: pointer;
+  border: 1px solid rgba(3, 102, 214, 0.2)
 }
 .selected {
-  border: 1px solid black;
+  box-shadow: rgba(3, 102, 214, 0.3) 0px 0px 0px 3px;
+  filter: grayscale(0)
+}
+.selected > picture > img {
+  filter: grayscale(0)
 }
 picture {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -39,7 +45,11 @@ picture {
 picture > img {
   height: 6em;
   width: 8em;
+  filter: grayscale(100%);
   object-fit: cover;
+}
+picture > img:hover {
+  filter: grayscale(0)
 }
 figcaption {
   height: 1.5em;

@@ -41,6 +41,31 @@ function System() {
         <img src={logoImage} alt="systemkonfigurator logo" width="200" />
       </div>
       <h3>Driver</h3>
+      <h3>{system.driver.name}</h3>
+      <div className={styles.features}>
+        <table>
+          <tbody>
+            {system.driver.globalSettings?.maxPower ? (
+              <tr>
+                <td>Max power</td>
+                <td>{system.driver.globalSettings.maxPower} W</td>
+              </tr>
+            ) : null}
+          </tbody>
+        </table>
+        {driverDrawingImage ?
+          <div
+            style={{
+              display: 'inline-block',
+              backgroundImage: driverDrawingImage,
+              backgroundSize: 'contain',
+              backgroundRepeat: 'none',
+              height: '10em',
+              width: '20em',
+            }}
+          ></div>
+          : null}
+      </div>
       <Drivers
         drivers={CCdrivers}
         selectedDriver={system.driver}
@@ -48,30 +73,6 @@ function System() {
       />
       <div className={styles.system}>
         <div className={styles.driver}>
-          <h3>{system.driver.name}</h3>
-          <div className={styles.features}>
-            <table>
-              <tbody>
-                {system.driver.globalSettings?.maxPower ? (
-                  <tr>
-                    <td>Max power</td>
-                    <td>{system.driver.globalSettings.maxPower} W</td>
-                  </tr>
-                ) : null}
-              </tbody>
-            </table>
-            {driverDrawingImage ?
-              <div
-                style={{
-                  display: 'inline-block',
-                  backgroundImage: driverDrawingImage,
-                  backgroundSize: 'cover',
-                  height: '10em',
-                  width: '20em',
-                }}
-              ></div>
-              : null}
-          </div>
 
           <div className={styles.setting}>
             <h3>Settings</h3>
