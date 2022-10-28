@@ -16,6 +16,7 @@ import CCdrivers from '../../products/drivers/CCdrivers'
 
 import Drivers from './Drivers'
 import Settings from './Settings'
+import { MaxPowerMeter } from './Meters'
 
 function System() {
   const system = useSelector(selectSystem)
@@ -37,7 +38,6 @@ function System() {
       <div className={styles.top}>
         <img src={logoImage} alt="systemkonfigurator logo" width="200" />
       </div>
-      <h3>Driver</h3>
       <h3>{system.driver.name}</h3>
       <Drivers
         drivers={CCdrivers}
@@ -46,9 +46,7 @@ function System() {
       />
       <div className={styles.system}>
         <div className={styles.driver}>
-
           <div className={styles.setting}>
-            <h3>Settings</h3>
             <Settings
               changeSetting={changeSetting}
               selectedSettings={selectedSettings}
@@ -56,16 +54,9 @@ function System() {
               settings={system.driver.settings}
             />
             <div className={styles.features}>
-              <table>
-                <tbody>
-                  {system.driver.globalSettings?.maxPower ? (
-                    <tr>
-                      <td>Max power</td>
-                      <td>{system.driver.globalSettings.maxPower} W</td>
-                    </tr>
-                  ) : null}
-                </tbody>
-              </table>
+              {system.driver.globalSettings?.maxPower && (
+                <MaxPowerMeter maxPower={system.driver.globalSettings.maxPower} />
+              )}
             </div>
           </div>
         </div>

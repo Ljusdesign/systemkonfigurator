@@ -56,4 +56,24 @@ function Meters({ index }) {
   )
 }
 
+function MaxPowerMeter({ maxPower }) {
+  const selectedSettings = useSelector(selectSelectedSettings)
+  const totalPower = useSelector(selectTotalPower)
+  const rounded = number => Math.round(number * 100) / 100
+  const driverTotalPower = totalPower.reduce((prev, curr) => prev + curr, 0)
+
+  return (
+    <div className={styles.meters}>
+      <Meter
+        name='Driver total max power'
+        low={0}
+        high={maxPower}
+        value={rounded(driverTotalPower)}
+        unit='W'
+      />
+    </div>
+  )
+}
+
+export { MaxPowerMeter }
 export default Meters
