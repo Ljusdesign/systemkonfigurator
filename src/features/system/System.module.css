@@ -1,13 +1,3 @@
-.system {
-  display: inline-flex;
-  flex-wrap: wrap;
-  gap: 2em;
-  justify-content: space-between;
-  padding: 1em;
-  border-bottom: 1px dotted #153055;
-  width: 100%;
-}
-
 .top {
   height: 100px;
 }

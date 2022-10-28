@@ -1,13 +1,16 @@
 .outputList {
   display: grid;
   grid-auto-flow: column;
+  grid-auto-columns: 10em;
+  padding-top: 1em;
+  padding-block-end: 2em;
 
+  overflow-x: auto;
   overscroll-behavior-x: contain;
-  scroll-snap-type: proximity;
-  padding-inline-start: 0em;
-  gap: 0.6em;
+  scroll-snap-type: x proximity;
+  gap: 0;
 }
-.setting {
+.select {
   width: 8em;
 
   scroll-snap-align: start;
@@ -15,20 +18,14 @@
   grid-auto-flow: row;
   overflow-y: auto;
   overscroll-behavior-y: contain;
-  scroll-snap-type: proximity;
-  padding-inline-start: 1em;
-  gap: 0.4em;
-  margin-right: 1em;;
-  padding: 0.5em;
+  scroll-snap-type: x proximity;
+  gap: 0;
   user-select: none;
+  text-align: center;
 }
 .setting:hover {
   cursor: pointer;
 }
 .selected {
   border: 1px solid black;
-}
-.select {
-  min-width: 8em;
-  margin-right: 1em;
 }
