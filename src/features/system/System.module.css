@@ -68,6 +68,19 @@
   border: 3px dashed transparent;
   height: 5em;
 }
+.channelOutputs {
+  grid-auto-flow: column;
+  grid-auto-columns: 10em;
+  padding-top: 1em;
+  padding-inline: 2em;
+  padding-block-end: 2em;
+
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  gap: 0.6em;
+  display: grid;
+}
 
 table {
   margin: 0.6em;

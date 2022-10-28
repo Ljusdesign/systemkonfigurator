@@ -16,10 +16,11 @@ function Settings({ selectedSettings, outputs, settings, changeSetting }) {
   return (
     <div className={styles.outputList}>
       {outputs.map((output, index) => (
-        <div key={JSON.stringify({...selectedSettings, index})}>
+        <div className={styles.select} key={JSON.stringify({...selectedSettings, index})}>
           <p>Ch. {index + 1}</p>
           <Select
             options={options}
+            isSearchable={false}
             defaultValue={options.filter(o => o.value === selectedSettings[index].current)}
             onChange={(e) => changeSetting(index, e)}
           />

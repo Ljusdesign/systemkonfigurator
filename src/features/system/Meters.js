@@ -30,16 +30,18 @@ function Meter({
   )
 }
 
+const rounded = number => Math.round(number * 100) / 100
+
 function Meters({ index }) {
   const selectedSettings = useSelector(selectSelectedSettings)
   const totalPower = useSelector(selectTotalPower)
   const totalVoltage = useSelector(selectTotalVoltage)
-  const rounded = number => Math.round(number * 100) / 100
 
   return (
     <div className={styles.meters}>
       <Meter
         name='Power'
+        className={styles.meter}
         low={selectedSettings[index].minPower}
         high={selectedSettings[index].maxPower}
         value={rounded(totalPower[index])}
@@ -47,6 +49,7 @@ function Meters({ index }) {
       />
       <Meter
         name='Voltage'
+        className={styles.meter}
         low={selectedSettings[index].minVoltage}
         high={selectedSettings[index].maxVoltage}
         value={rounded(totalVoltage[index])}
@@ -57,9 +60,7 @@ function Meters({ index }) {
 }
 
 function MaxPowerMeter({ maxPower }) {
-  const selectedSettings = useSelector(selectSelectedSettings)
   const totalPower = useSelector(selectTotalPower)
-  const rounded = number => Math.round(number * 100) / 100
   const driverTotalPower = totalPower.reduce((prev, curr) => prev + curr, 0)
 
   return (

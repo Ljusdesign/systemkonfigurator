@@ -1,7 +1,6 @@
 .outputList {
   display: grid;
   grid-auto-flow: column;
-  padding-block-end: 2em;
 
   overscroll-behavior-x: contain;
   scroll-snap-type: proximity;
@@ -19,7 +18,7 @@
   scroll-snap-type: proximity;
   padding-inline-start: 1em;
   gap: 0.4em;
-  margin: 0;
+  margin-right: 1em;;
   padding: 0.5em;
   user-select: none;
 }
@@ -28,4 +27,8 @@
 }
 .selected {
   border: 1px solid black;
+}
+.select {
+  min-width: 8em;
+  margin-right: 1em;
 }
