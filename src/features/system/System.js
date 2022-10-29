@@ -6,6 +6,8 @@ import {
   selectSystem,
   selectDriver,
   selectSelectedSettings,
+  selectAllDrivers,
+  selectAllFixtures,
   getSystemDriver,
   getSystemDriverSetting,
   deleteFixture,
@@ -13,8 +15,6 @@ import {
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
 import FixturePicker from '../fixture/FixturePicker'
-import CCfixtures from '../../products/fixtures/CCfixtures'
-import CCdrivers from '../../products/drivers/CCdrivers'
 
 import Drivers from './Drivers'
 import Settings from './Settings'
@@ -31,6 +31,8 @@ function System() {
   const selectedDriver = useSelector(selectDriver)
   const selectedSettings = useSelector(selectSelectedSettings)
   const selectedOutputs = useSelector(selectOutputs)
+  const allFixtures = useSelector(selectAllFixtures)
+  const allDrivers = useSelector(selectAllDrivers)
   const dispatch = useDispatch(systemSlice)
 
   function changeDriver(index) {

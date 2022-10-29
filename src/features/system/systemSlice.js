@@ -72,8 +72,11 @@ export const selectSelectedSettings =
     output => state.system.allDrivers[state.system.driver.index].settings[output]
   )
 
-export const selectFixtures =
-  state => state.system.fixtures
+export const selectAllDrivers =
+  state => state.system.allDrivers
+
+export const selectAllFixtures =
+  state => state.system.allFixtures
 
 export const selectTotalPower =
   state => state.system.allDrivers[state.system.driver.index].outputs.map(
