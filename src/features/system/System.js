@@ -52,32 +52,31 @@ function System() {
       </div>
       <h3>{selectedDriver.name}</h3>
       <Drivers
-        drivers={CCdrivers}
+        drivers={allDrivers}
         selectedDriver={selectedDriver}
         changeDriver={changeDriver}
       />
-          <div className={styles.setting}>
-            <Settings
-              changeSetting={changeSetting}
-              selectedSettings={selectedSettings}
-              outputs={selectedDriver.outputs}
-              settings={selectedDriver.settings}
-            />
-            <div className={styles.features}>
-              {selectedDriver.globalSettings?.maxPower && (
-                <MaxPowerMeter maxPower={selectedDriver.globalSettings.maxPower} />
-              )}
-            </div>
+      <div className={styles.setting}>
+        <Settings
+          changeSetting={changeSetting}
+          selectedSettings={selectedSettings}
+          outputs={selectedDriver.outputs}
+          settings={selectedDriver.settings}
+        />
+        <div className={styles.features}>
+          {selectedDriver.globalSettings?.maxPower && (
+            <MaxPowerMeter maxPower={selectedDriver.globalSettings.maxPower} />
+          )}
+        </div>
       </div>
 
-      <FixturePicker fixtures={CCfixtures} />
+      <FixturePicker fixtures={allFixtures} />
 
       <div className={styles.channelOutputs}>
         {selectedDriver.outputs.map((o, index) => (
           <FixtureList
             key={index}
             fixtures={system.fixtures}
-
             deleteFixture={id => dispatch(deleteFixture(id))}
             driverCurrent={selectedSettings[index].current}
           />
