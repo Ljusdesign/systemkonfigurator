@@ -1,10 +1,15 @@
 import cover from './arty-accent-ccl-table.png'
 const fixture = {
-  name: 'Arty Accent CC for LED-profile',
+  id: 'ARTACC##B-CCL-*',
+  name: 'Arty Accent CC 450lm for LED-profile',
   shortName: "Arty Accent",
   voltage: 12,
   maxCurrent: 500,
-  cover
+  cover,
+  lightTemperatures: [
+    2700,
+    3000,
+  ],
 }
 
 export default fixture

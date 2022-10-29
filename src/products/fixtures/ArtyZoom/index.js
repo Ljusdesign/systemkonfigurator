@@ -1,11 +1,15 @@
 import cover from './arty-zoom-ccl-table.png'
 const fixture = {
-  name: 'Arty Zoom / CC 450lm LED-profile',
+  id: 'ARTZ##B-CCL-*',
+  name: 'Arty Zoom CC 450lm for LED-profile',
   shortName: "Arty Zoom",
-  artNo: 'ARTZ##B-CCL-*',
   voltage: 12,
   maxCurrent: 500,
-  cover
+  cover,
+  lightTemperatures: [
+    2700,
+    3000,
+  ],
 }
 
 export default fixture
