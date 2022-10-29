@@ -29,7 +29,7 @@
 }
 .features {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 .reload>span {
   font-family: Lucida Sans Unicode;
