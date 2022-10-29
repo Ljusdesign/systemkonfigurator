@@ -1,10 +1,9 @@
 import React from 'react'
 import styles from './Fixture.module.css'
-
+import highCurrent from './electricity-caution.svg'
 
 function Fixture({ fixture, index, deleteFixture, driverCurrent }) {
   const background = `url(${fixture.cover})`
-  const highCurrent = `${process.env.PUBLIC_URL}/images/electricity-caution.svg`
   const currentTooHigh = driverCurrent > fixture.maxCurrent
 
   return (
