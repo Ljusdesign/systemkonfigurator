@@ -15,7 +15,7 @@ function Meter({
   unit,
 }) {
   return (
-    <div className={styles.meter}>
+    <>
       <label htmlFor="meter">{name}<br /></label>
       {value < high ?
         <meter low={low} max={high} value={value}>{value}</meter> :
@@ -26,7 +26,7 @@ function Meter({
         `${value} (${low}-${high} ${unit})` :
         `${value} (${high} ${unit})`
       }
-    </div>
+    </>
   )
 }
 
@@ -38,7 +38,7 @@ function Meters({ index }) {
   const totalVoltage = useSelector(selectTotalVoltage)
 
   return (
-    <div className={styles.meters}>
+    <>
       <Meter
         name='Power'
         className={styles.meter}
@@ -55,7 +55,7 @@ function Meters({ index }) {
         value={rounded(totalVoltage[index])}
         unit='V'
       />
-    </div>
+    </>
   )
 }
 
@@ -64,7 +64,7 @@ function MaxPowerMeter({ maxPower }) {
   const driverTotalPower = totalPower.reduce((prev, curr) => prev + curr, 0)
 
   return (
-    <div className={styles.meters}>
+    <>
       <Meter
         name='Driver total max power'
         low={0}
@@ -72,7 +72,7 @@ function MaxPowerMeter({ maxPower }) {
         value={rounded(driverTotalPower)}
         unit='W'
       />
-    </div>
+    </>
   )
 }
 

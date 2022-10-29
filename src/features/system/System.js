@@ -54,8 +54,6 @@ function System() {
         selectedDriver={selectedDriver}
         changeDriver={changeDriver}
       />
-      <div className={styles.system}>
-        <div className={styles.driver}>
           <div className={styles.setting}>
             <Settings
               changeSetting={changeSetting}
@@ -68,8 +66,6 @@ function System() {
                 <MaxPowerMeter maxPower={selectedDriver.globalSettings.maxPower} />
               )}
             </div>
-          </div>
-        </div>
       </div>
 
       <FixturePicker fixtures={CCfixtures} />
