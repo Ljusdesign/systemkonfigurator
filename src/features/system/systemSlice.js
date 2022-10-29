@@ -18,7 +18,7 @@ export const systemSlice = createSlice({
   initialState,
   reducers: {
     getSystemDriver: (state, action) => {
-      const index = action.payload
+      const { index } = action.payload
       state.driver.index = index
       state.driver.outputs = state.allDrivers[index].outputs
     },

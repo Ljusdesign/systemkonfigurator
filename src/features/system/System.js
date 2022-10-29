@@ -34,7 +34,7 @@ function System() {
   const dispatch = useDispatch(systemSlice)
 
   function changeDriver(index) {
-    dispatch(getSystemDriver(index))
+    dispatch(getSystemDriver({ index }))
   }
   function changeSetting(index, e) {
     dispatch(getSystemDriverSetting({ index, current: e.value }))
