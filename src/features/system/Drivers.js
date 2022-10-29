@@ -4,11 +4,11 @@ import styles from './Drivers.module.css'
 function Drivers({drivers, selectedDriver, changeDriver}) {
   return (
     <div className={styles.list}>
-      {drivers.map(d => (
+      {drivers.map((d, index) => (
         <figure
           key={d.artNo}
           className={selectedDriver.artNo === d.artNo ? styles.selected : ''}
-          onClick={() => changeDriver(d)}
+          onClick={() => changeDriver(index)}
         >
           <picture>
             {d.cover ? <img src={d.cover} alt={d.name} /> : null}

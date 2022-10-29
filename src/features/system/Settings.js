@@ -22,6 +22,8 @@ function Settings({ selectedSettings, outputs, settings, changeSetting }) {
             options={options}
             isSearchable={false}
             defaultValue={options.filter(o => o.value === selectedSettings[index].current)}
+            menuPortalTarget={document.body}
+            styles={{ menuPortal: base => ({ ...base, zIndex: 9999 }) }}
             onChange={(e) => changeSetting(index, e)}
           />
           <Meters index={index} />

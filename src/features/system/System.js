@@ -4,10 +4,12 @@ import styles from './System.module.css'
 import {
   systemSlice,
   selectSystem,
+  selectDriver,
   selectSelectedSettings,
-  loadSystemDriver,
-  loadSystemDriverSetting,
+  getSystemDriver,
+  getSystemDriverSetting,
   deleteFixture,
+  selectOutputs,
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
 import FixturePicker from '../fixture/FixturePicker'
@@ -18,19 +20,27 @@ import Drivers from './Drivers'
 import Settings from './Settings'
 import { MaxPowerMeter } from './Meters'
 
+export const PrintDebug = ({ children }) => (
+  <pre className={styles.json}>
+    {children.map(c => JSON.stringify(c, null, 2))}
+  </pre>
+)
+
 function System() {
   const system = useSelector(selectSystem)
+  const selectedDriver = useSelector(selectDriver)
   const selectedSettings = useSelector(selectSelectedSettings)
+  const selectedOutputs = useSelector(selectOutputs)
   const dispatch = useDispatch(systemSlice)
 
-  function changeDriver(driver) {
-    dispatch(loadSystemDriver(driver))
+  function changeDriver(index) {
+    dispatch(getSystemDriver(index))
   }
   function changeSetting(index, e) {
-    dispatch(loadSystemDriverSetting({ index, current: e.value }))
+    dispatch(getSystemDriverSetting({ index, current: e.value }))
   }
 
-  const driverDrawingImage = `url(${system.driver.drawing})`
+  const driverDrawingImage = `url(${selectedDriver.drawing})`
   const logoImage = `${process.env.PUBLIC_URL}/images/systemkonfigurator.png`
 
   return (
@@ -38,10 +48,10 @@ function System() {
       <div className={styles.top}>
         <img src={logoImage} alt="systemkonfigurator logo" width="200" />
       </div>
-      <h3>{system.driver.name}</h3>
+      <h3>{selectedDriver.name}</h3>
       <Drivers
         drivers={CCdrivers}
-        selectedDriver={system.driver}
+        selectedDriver={selectedDriver}
         changeDriver={changeDriver}
       />
       <div className={styles.system}>
@@ -50,12 +60,12 @@ function System() {
             <Settings
               changeSetting={changeSetting}
               selectedSettings={selectedSettings}
-              outputs={system.driver.outputs}
-              settings={system.driver.settings}
+              outputs={selectedDriver.outputs}
+              settings={selectedDriver.settings}
             />
             <div className={styles.features}>
-              {system.driver.globalSettings?.maxPower && (
-                <MaxPowerMeter maxPower={system.driver.globalSettings.maxPower} />
+              {selectedDriver.globalSettings?.maxPower && (
+                <MaxPowerMeter maxPower={selectedDriver.globalSettings.maxPower} />
               )}
             </div>
           </div>

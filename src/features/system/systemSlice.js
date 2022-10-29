@@ -1,9 +1,13 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { loadDriver } from '../../products/drivers/CCdrivers'
+import drivers from '../../products/drivers/CCdrivers'
 
 const initialState = {
-  driver: loadDriver(),
+  driver: {
+    index: 0,
+    outputs: [0]
+  },
   fixtures: [],
+  allDrivers: drivers,
 }
 
 const nearest = (goal, prev, curr) => Math.abs(curr-goal) < Math.abs(prev-goal)
@@ -13,13 +17,18 @@ export const systemSlice = createSlice({
   name: 'system',
   initialState,
   reducers: {
-    loadSystemDriver: (state, action) => {
-      state.driver = loadDriver(action.payload)
+    getSystemDriver: (state, action) => {
+      const index = action.payload
+      state.driver.index = index
+      state.driver.outputs = state.allDrivers[index].outputs
     },
-    loadSystemDriverSetting: (state, action) => {
+    getSystemDriverSetting: (state, action) => {
       const {index, current} = action.payload
-      /* find nearest setting */
-      state.driver.outputs[index] = state.driver.settings.findIndex(s => s.current === current)
+      /* TODO find nearest setting */
+      state.driver.outputs[index] =
+        state.allDrivers[state.driver.index].settings.findIndex(
+          s => s.current === current
+        )
     },
     addFixture: (state, action) => {
       state.fixtures.push({
@@ -41,31 +50,44 @@ export const systemSlice = createSlice({
   }
 })
 
-export const { loadSystemDriver, loadSystemDriverSetting, addFixture, deleteFixture, updateFixtureCurrent, reset } = systemSlice.actions
+export const { getSystemDriver, getSystemDriverSetting, addFixture, deleteFixture, updateFixtureCurrent, reset } = systemSlice.actions
 
-export const selectSystem = state => state.system
-export const selectOutputs = state => state.system.driver.outputs
-export const selectSelectedSettings = state => {
-  const result = state.system.driver.outputs.map((o, index) => {
-    return state.system.driver.settings[o]
-  })
-  return result
-}
-export const selectFixtures = state => state.system.fixtures
-export const selectTotalPower = state => state.system.driver.outputs.map((o, index) => {
-  if (index === 0) {
-    return state.system.fixtures.reduce(
-      (acc, curr) => acc + state.system.driver.settings[index].current * curr.voltage / 1000,
-      0
-    )
-  } else {
-    return 0
-  }
-})
-export const selectTotalVoltage = state => state.system.driver.outputs.map((o, index) => {
-  return state.system.fixtures.reduce(
-    (acc, curr) => index === 0 ? acc + curr.voltage : 0, 0
+export const selectSystem =
+  state => state.system
+
+export const selectDriver =
+  state => state.system.allDrivers[state.system.driver.index]
+
+export const selectOutputs =
+  state => state.system.allDrivers[state.system.driver.index].outputs
+
+export const selectSelectedSettings =
+  state => state.system.driver.outputs.map(
+    output => state.system.allDrivers[state.system.driver.index].settings[output]
   )
-})
+
+export const selectFixtures =
+  state => state.system.fixtures
+
+export const selectTotalPower =
+  state => state.system.allDrivers[state.system.driver.index].outputs.map(
+    (o, index) => {
+      if (index === 0) {
+        return state.system.fixtures.reduce(
+          (acc, curr) => acc + state.system.allDrivers[state.system.driver.index].settings[index].current * curr.voltage / 1000,
+          0
+        )
+      } else {
+        return 0
+      }
+    })
+export const selectTotalVoltage =
+  state => state.system.allDrivers[state.system.driver.index].outputs.map(
+    (o, index) => {
+      return state.system.fixtures.reduce(
+        (acc, curr) => index === 0 ? acc + curr.voltage : 0, 0
+      )
+    }
+  )
 
 export default systemSlice.reducer
