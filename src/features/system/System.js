@@ -75,15 +75,14 @@ function System() {
       <FixturePicker fixtures={CCfixtures} />
 
       <div className={styles.channelOutputs}>
-        {system.driver.outputs.map((o, index) => (
-          <>
-            <FixtureList
-              key={index}
-              fixtures={system.fixtures}
-              deleteFixture={id => dispatch(deleteFixture(id))}
-              driverCurrent={selectedSettings[index].current}
-            />
-          </>
+        {selectedDriver.outputs.map((o, index) => (
+          <FixtureList
+            key={index}
+            fixtures={system.fixtures}
+
+            deleteFixture={id => dispatch(deleteFixture(id))}
+            driverCurrent={selectedSettings[index].current}
+          />
         ))}
       </div>
 
