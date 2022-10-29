@@ -50,7 +50,11 @@ export const systemSlice = createSlice({
   }
 })
 
-export const { getSystemDriver, getSystemDriverSetting, addFixture, deleteFixture, updateFixtureCurrent, reset } = systemSlice.actions
+export const {
+  getSystemDriver, getSystemDriverSetting,
+  addFixture,deleteFixture, updateFixtureCurrent,
+  reset
+} = systemSlice.actions
 
 export const selectSystem =
   state => state.system
@@ -71,23 +75,20 @@ export const selectFixtures =
 
 export const selectTotalPower =
   state => state.system.allDrivers[state.system.driver.index].outputs.map(
-    (o, index) => {
-      if (index === 0) {
-        return state.system.fixtures.reduce(
-          (acc, curr) => acc + state.system.allDrivers[state.system.driver.index].settings[index].current * curr.voltage / 1000,
-          0
-        )
-      } else {
-        return 0
-      }
-    })
+    (o, index) => (
+      state.system.fixtures.reduce(
+        (acc, curr) => acc + state.system.allDrivers[state.system.driver.index].settings[index].current * curr.voltage / 1000,
+        0
+      )
+    )
+  )
 export const selectTotalVoltage =
   state => state.system.allDrivers[state.system.driver.index].outputs.map(
-    (o, index) => {
-      return state.system.fixtures.reduce(
+    (o, index) => (
+      state.system.fixtures.reduce(
         (acc, curr) => index === 0 ? acc + curr.voltage : 0, 0
       )
-    }
+    )
   )
 
 export default systemSlice.reducer
