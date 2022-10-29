@@ -1,7 +1,6 @@
 .list {
   border: 1px solid black;
   min-height: 230px;
-  width: 10em;
   display: grid;
   grid-auto-flow: row;
   justify-content: flex-start;

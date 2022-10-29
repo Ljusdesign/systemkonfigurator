@@ -52,7 +52,6 @@
   grid-auto-flow: column;
   grid-auto-columns: 10em;
   padding-top: 1em;
-  padding-inline: 2em;
   padding-block-end: 2em;
 
   overflow-x: auto;
