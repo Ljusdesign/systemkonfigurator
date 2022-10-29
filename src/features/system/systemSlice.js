@@ -1,13 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 import drivers from '../../products/drivers/CCdrivers'
+import fixtures from '../../products/fixtures/CCfixtures'
 
 const initialState = {
   driver: {
     index: 0,
-    outputs: [0]
+    outputs: drivers[0].outputs,
   },
   fixtures: [],
   allDrivers: drivers,
+  allFixtures: fixtures,
 }
 
 const nearest = (goal, prev, curr) => Math.abs(curr-goal) < Math.abs(prev-goal)
