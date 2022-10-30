@@ -7,7 +7,7 @@ function FixtureList({fixtures, deleteFixture, driverCurrent }) {
     <div className={styles.list}>
       {fixtures.map((fixture, index) => (
         <Fixture
-          key={fixture.id}
+          key={JSON.stringify(fixture.id + index)}
           index={index}
           fixture={fixture}
           deleteFixture={deleteFixture}

@@ -1,15 +1,17 @@
 import { createSlice } from '@reduxjs/toolkit'
 import drivers from '../../products/drivers/CCdrivers'
-import fixtures from '../../products/fixtures/CCfixtures'
+import CCfixtures from '../../products/fixtures/CCfixtures'
 
 const initialState = {
   driver: {
     index: 0,
     outputs: drivers[0].outputs,
   },
-  fixtures: [],
+  fixtures: [
+    []
+  ],
   allDrivers: drivers,
-  allFixtures: fixtures,
+  allFixtures: CCfixtures,
 }
 
 const nearest = (goal, prev, curr) => Math.abs(curr-goal) < Math.abs(prev-goal)
@@ -23,6 +25,9 @@ export const systemSlice = createSlice({
       const { index } = action.payload
       state.driver.index = index
       state.driver.outputs = state.allDrivers[index].outputs
+      state.fixtures = state.driver.outputs.map((o, index) => (
+        [index] = []
+      ))
     },
     getSystemDriverSetting: (state, action) => {
       const {index, current} = action.payload
@@ -33,14 +38,13 @@ export const systemSlice = createSlice({
         )
     },
     addFixture: (state, action) => {
-      state.fixtures.push({
-        ...action.payload,
-        id: fixtureId++,
-      })
+      const { selectedOutput, index } = action.payload
+      state.fixtures[selectedOutput].push({id: index, index: fixtureId++})
     },
     deleteFixture: (state, action) => {
-      state.fixtures.splice(
-        state.fixtures.findIndex(fix => fix.id === action.payload),
+      const { selectedOutput, index } = action.payload
+      state.fixtures[selectedOutput].splice(
+        state.fixtures[selectedOutput].findIndex(fix => fix.id === index),
         1
       )
     },
@@ -75,23 +79,23 @@ export const selectSelectedSettings =
 export const selectAllDrivers =
   state => state.system.allDrivers
 
-export const selectAllFixtures =
-  state => state.system.allFixtures
+export const selectAllFixtures = state => state.system.allFixtures
 
-export const selectTotalPower =
-  state => state.system.allDrivers[state.system.driver.index].outputs.map(
-    (o, index) => (
-      state.system.fixtures.reduce(
-        (acc, curr) => acc + state.system.allDrivers[state.system.driver.index].settings[index].current * curr.voltage / 1000,
-        0
-      )
+export const selectFixtures =
+  state => state.system.driver.outputs.map(
+    (o, oIndex) => state.system.fixtures[oIndex].map(
+      f => state.system.allFixtures.filter(
+        af => f.id === af.id
+      )[0]
     )
   )
-export const selectTotalVoltage =
-  state => state.system.allDrivers[state.system.driver.index].outputs.map(
+
+export const selectTotalPower =
+  state => state.system.driver.outputs.map(
     (o, index) => (
-      state.system.fixtures.reduce(
-        (acc, curr) => index === 0 ? acc + curr.voltage : 0, 0
+      state.system.fixtures[index].reduce(
+        (acc, curr) => acc + state.system.allDrivers[state.system.driver.index].settings[o].current * curr.voltage / 1000,
+        0
       )
     )
   )

@@ -6,14 +6,14 @@ import {
 } from '../system/systemSlice'
 import styles from './../system/Drivers.module.css'
 
-function FixturePicker({ fixtures }) {
+function FixturePicker({ selectedOutput, fixtures }) {
   const dispatch = useDispatch(systemSlice)
   return (
     <div className={styles.list}>
       {fixtures.map((f, index) => (
         <figure
           key={index}
-          onClick={() => dispatch(addFixture(fixtures[index]))}
+          onClick={() => dispatch(addFixture({selectedOutput, index: f.id}))}
         >
           <picture>
             <img src={f.cover} alt={f.shortName} />

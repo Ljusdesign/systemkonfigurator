@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import styles from './System.module.css'
 import {
@@ -11,7 +11,7 @@ import {
   getSystemDriver,
   getSystemDriverSetting,
   deleteFixture,
-  selectOutputs,
+  selectFixtures,
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
 import FixturePicker from '../fixture/FixturePicker'
@@ -30,10 +30,15 @@ function System() {
   const system = useSelector(selectSystem)
   const selectedDriver = useSelector(selectDriver)
   const selectedSettings = useSelector(selectSelectedSettings)
-  const selectedOutputs = useSelector(selectOutputs)
   const allFixtures = useSelector(selectAllFixtures)
+  const selectedFixtures = useSelector(selectFixtures)
   const allDrivers = useSelector(selectAllDrivers)
+
+  const fixtureVoltages = selectedFixtures.map(
+    (o, oIndex) => o.reduce((acc, f) => acc + f.voltage, 0)
+  )
   const dispatch = useDispatch(systemSlice)
+  const [selectedOutput, setOutput] = useState(0)
 
   function changeDriver(index) {
     dispatch(getSystemDriver({ index }))
@@ -65,29 +70,40 @@ function System() {
         />
         <div className={styles.features}>
           {selectedDriver.globalSettings?.maxPower && (
-            <MaxPowerMeter maxPower={selectedDriver.globalSettings.maxPower} />
+            <MaxPowerMeter
+              fixtureVoltages={fixtureVoltages}
+              selectedSettings={selectedSettings}
+              maxPower={selectedDriver.globalSettings.maxPower}
+            />
           )}
         </div>
       </div>
 
-      <FixturePicker fixtures={allFixtures} />
+      <FixturePicker selectedOutput={selectedOutput} fixtures={allFixtures} />
 
       <div className={styles.channelOutputs}>
         {selectedDriver.outputs.map((o, index) => (
-          <FixtureList
-            key={index}
-            fixtures={system.fixtures}
-            deleteFixture={id => dispatch(deleteFixture(id))}
-            driverCurrent={selectedSettings[index].current}
-          />
+          <div key={index} className={styles.outputLane}>
+            <button onClick={() => setOutput(index)}>Set output {index+1}</button>
+            <FixtureList
+              key={index}
+              fixtures={selectedFixtures[index]}
+              deleteFixture={index => dispatch(deleteFixture({index, selectedOutput}))}
+              driverCurrent={selectedSettings[index].current}
+            />
+          </div>
         ))}
       </div>
 
-      <div>
-        <pre className={styles.json}>
-          State: {JSON.stringify(system, null, 2)}
-        </pre>
-      </div>
+      <PrintDebug>
+        selectedFixtures: {selectedFixtures}
+      </PrintDebug>
+      <PrintDebug>
+        State: {system}
+      </PrintDebug>
+      <PrintDebug>
+        allFixtures {allFixtures}
+      </PrintDebug>
     </>
   )
 }

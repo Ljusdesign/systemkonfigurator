@@ -1,10 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-import {
-  selectSelectedSettings,
-  selectTotalPower,
-  selectTotalVoltage,
-} from './systemSlice'
 import styles from './Meters.module.css'
 
 function Meter({
@@ -32,36 +26,41 @@ function Meter({
 
 const rounded = number => Math.round(number * 100) / 100
 
-function Meters({ index }) {
-  const selectedSettings = useSelector(selectSelectedSettings)
-  const totalPower = useSelector(selectTotalPower)
-  const totalVoltage = useSelector(selectTotalVoltage)
+function Meters({ selectedSettings, totalVoltage, totalPower }) {
+  const { minPower, maxPower } = selectedSettings
+  const { minVoltage, maxVoltage } = selectedSettings
 
   return (
     <>
       <Meter
         name='Power'
         className={styles.meter}
-        low={selectedSettings[index].minPower}
-        high={selectedSettings[index].maxPower}
-        value={rounded(totalPower[index])}
+        low={minPower}
+        high={maxPower}
+        value={rounded(totalPower)}
         unit='W'
       />
       <Meter
         name='Voltage'
         className={styles.meter}
-        low={selectedSettings[index].minVoltage}
-        high={selectedSettings[index].maxVoltage}
-        value={rounded(totalVoltage[index])}
+        low={minVoltage}
+        high={maxVoltage}
+        value={rounded(totalVoltage)}
         unit='V'
       />
     </>
   )
 }
 
-function MaxPowerMeter({ maxPower }) {
-  const totalPower = useSelector(selectTotalPower)
-  const driverTotalPower = totalPower.reduce((prev, curr) => prev + curr, 0)
+function MaxPowerMeter({ maxPower, selectedSettings, fixtureVoltages }) {
+  const totalCurrent = selectedSettings.map(
+    (s) => s.current
+  )
+  const totalOutputPower = fixtureVoltages.map(
+    (f, fIndex) => totalCurrent[fIndex] / 1000 * f
+  ).reduce(
+    (acc, curr) => acc + curr, 0
+  )
 
   return (
     <>
@@ -69,7 +68,7 @@ function MaxPowerMeter({ maxPower }) {
         name='Driver total max power'
         low={0}
         high={maxPower}
-        value={rounded(driverTotalPower)}
+        value={rounded(totalOutputPower)}
         unit='W'
       />
     </>
