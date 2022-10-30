@@ -60,6 +60,11 @@
   gap: 0.6em;
   display: grid;
 }
+button {
+  width: 100%;
+  margin-bottom: 1em;
+  align-self: center;
+}
 table {
   margin: 0.6em;
   margin-top: 1em;

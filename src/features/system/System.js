@@ -83,13 +83,17 @@ function System() {
 
       <div className={styles.channelOutputs}>
         {selectedDriver.outputs.map((o, index) => (
-          <div key={index} className={styles.outputLane}>
+          <div
+            key={index}
+            className={styles.outputLane}
+          >
             <button onClick={() => setOutput(index)}>Set output {index+1}</button>
             <FixtureList
               key={index}
               fixtures={selectedFixtures[index]}
               deleteFixture={index => dispatch(deleteFixture({index, selectedOutput}))}
               driverCurrent={selectedSettings[index].current}
+              selected={index === selectedOutput}
             />
           </div>
         ))}
