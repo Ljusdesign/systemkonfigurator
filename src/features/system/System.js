@@ -96,13 +96,7 @@ function System() {
       </div>
 
       <PrintDebug>
-        selectedFixtures: {selectedFixtures}
-      </PrintDebug>
-      <PrintDebug>
         State: {system}
-      </PrintDebug>
-      <PrintDebug>
-        allFixtures {allFixtures}
       </PrintDebug>
     </>
   )
