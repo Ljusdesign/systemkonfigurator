@@ -5,6 +5,7 @@ import LD30 from './LD30'
 import LD50 from './LD50'
 import MaxiJolly from './MaxiJolly'
 import POWERdrive from './POWERdrive1060A'
+import SOLOdrive from './SOLOdrive360A'
 import LED10 from './LED10'
 
 const drivers = [
@@ -13,6 +14,7 @@ const drivers = [
   LD50,
   MaxiJolly,
   POWERdrive,
+  SOLOdrive,
   LED10,
 ]
 
