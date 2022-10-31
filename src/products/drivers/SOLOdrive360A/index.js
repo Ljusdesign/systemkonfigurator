@@ -1,5 +1,5 @@
 import cover from './1632227095-product-image-solodrive360a-398x398.avif'
-import drawing from './drawing.png'
+import drawing from './drawing-solodrive360.png'
 
 const driver = {
   name: 'SOLOdrive 360/A',
