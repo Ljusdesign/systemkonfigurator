@@ -42,11 +42,8 @@ export const systemSlice = createSlice({
       state.fixtures[selectedOutput].push({id: index, index: fixtureId++})
     },
     deleteFixture: (state, action) => {
-      const { selectedOutput, index } = action.payload
-      state.fixtures[selectedOutput].splice(
-        state.fixtures[selectedOutput].findIndex(fix => fix.id === index),
-        1
-      )
+      const { output, index } = action.payload
+      state.fixtures[output].splice(index, 1)
     },
     setColor: (state, action) => {
       const { id, color } = action
@@ -58,7 +55,7 @@ export const systemSlice = createSlice({
 
 export const {
   getSystemDriver, getSystemDriverSetting,
-  addFixture,deleteFixture, updateFixtureCurrent,
+  addFixture, deleteFixture, updateFixtureCurrent,
   reset
 } = systemSlice.actions
 

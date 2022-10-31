@@ -10,7 +10,6 @@ import {
   selectAllFixtures,
   getSystemDriver,
   getSystemDriverSetting,
-  deleteFixture,
   selectFixtures,
 } from './systemSlice'
 import FixtureList from '../fixture/FixtureList'
@@ -91,8 +90,8 @@ function System() {
             <FixtureList
               key={index}
               fixtures={selectedFixtures[index]}
-              deleteFixture={index => dispatch(deleteFixture({index, selectedOutput}))}
               driverCurrent={selectedSettings[index].current}
+              output={index}
               selected={index === selectedOutput}
             />
           </div>

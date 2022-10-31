@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './Fixture.module.css'
 import highCurrent from './electricity-caution.svg'
 
-function Fixture({ fixture, index, deleteFixture, driverCurrent }) {
+function Fixture({ fixture, index, deleteFixture, driverCurrent, output }) {
   const background = `url(${fixture.cover})`
   const currentTooHigh = driverCurrent > fixture.maxCurrent
 
@@ -17,9 +17,9 @@ function Fixture({ fixture, index, deleteFixture, driverCurrent }) {
     >
       {index+1}
       <button
-        onClick={() => deleteFixture(fixture.id)}
+        onClick={() => deleteFixture({index: fixture.id, output: index})}
         className={styles.deleteButton}
-      >✗</button>
+      >X</button>
       <div className={styles.text}>{fixture.shortName}</div>
       {currentTooHigh && (
         <span className={styles.highCurrent}>
