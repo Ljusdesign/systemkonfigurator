@@ -27,8 +27,13 @@ function Meter({
 const rounded = number => Math.round(number * 100) / 100
 
 function Meters({ selectedSettings, totalVoltage, totalPower }) {
-  const { minPower, maxPower } = selectedSettings
   const { minVoltage, maxVoltage } = selectedSettings
+  const { minPower } = selectedSettings
+  let maxPower
+  selectedSettings.maxPower ?
+    maxPower = selectedSettings.maxPower :
+    maxPower = maxVoltage * selectedSettings.current / 1000
+  if (maxPower > 30) maxPower = 30
 
   return (
     <>
